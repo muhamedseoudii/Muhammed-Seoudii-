@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/core/logic/helper_methods.dart';
+import 'package:jobsque/homeNavBar/homeScreen/notification/notificationIlustration/view.dart';
 
 import '../../../core/design/view.dart';
 
@@ -72,6 +74,7 @@ class _NotificationViewState extends State<NotificationView> {
             Padding(
               padding: const EdgeInsets.all(24),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
                     onPressed: () {
@@ -82,7 +85,7 @@ class _NotificationViewState extends State<NotificationView> {
                       fit: BoxFit.scaleDown,
                     ),
                   ),
-                  SizedBox(width: 80.w),
+
                   Text(
                     textAlign: TextAlign.center,
                     "Notification",
@@ -92,6 +95,12 @@ class _NotificationViewState extends State<NotificationView> {
                       fontWeight: FontWeight.w500,
                       wordSpacing: 1,
                     ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      navigateTo(context, NotificationIlustrationView());
+                    },
+                    icon: Icon(Icons.delete_outline)
                   ),
                 ],
               ),

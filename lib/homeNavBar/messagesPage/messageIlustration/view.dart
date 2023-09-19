@@ -1,65 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:jobsque/core/logic/helper_methods.dart';
-import 'package:jobsque/homeNavBar/messagesPage/unreadMessage/view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../core/design/view.dart';
 
-class MessagesPageView extends StatefulWidget {
-  const MessagesPageView({Key? key}) : super(key: key);
+class MessageIlustrationView extends StatefulWidget {
+  const MessageIlustrationView({Key? key}) : super(key: key);
 
   @override
-  State<MessagesPageView> createState() => _MessagesPageViewState();
+  State<MessageIlustrationView> createState() => _MessageIlustrationViewState();
 }
 
-class _MessagesPageViewState extends State<MessagesPageView> {
-  var _controller = TextEditingController();
-  bool isSelected = false;
+class _MessageIlustrationViewState extends State<MessageIlustrationView> {
 
-  List<MessageModel> list = [
-    MessageModel(
-        userImage: "assets/images/TwitterMsg.png",
-        userName: "Twitter",
-        msg: "Here is the link: http://zoom.com/abcdeefg",
-        time: "12.39"),
-    MessageModel(
-        userImage: "assets/images/GojekMsg.png",
-        userName: "Gojek Indonesia",
-        msg: "Let’s keep in touch.",
-        time: "12.39"),
-    MessageModel(
-        userImage: "assets/images/ShoopeMsg.png",
-        userName: "Shoope",
-        msg: "Thank You David!",
-        time: "09.45"),
-    MessageModel(
-        userImage: "assets/images/DanaMsg.png",
-        userName: "Dana",
-        msg: "Thank you for your attention!",
-        time: "Yesterday"),
-    MessageModel(
-        userImage: "assets/images/SlackMsg.png",
-        userName: "Slack",
-        msg: "You: I look forward to hearing from you",
-        time: "12/8"),
-    MessageModel(
-        userImage: "assets/images/FacebookMsg.png",
-        userName: "Facebook",
-        msg: "You: What about the interview stage?",
-        time: "12/8"),
-  ];
+  var _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.sp),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 24,top: 24),
+              child: Row(
                 children: [
                   IconButton(
                     onPressed: () {
@@ -83,8 +47,10 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                   ),
                 ],
               ),
-              SizedBox(height: 24.h),
-              Row(
+            ),
+            Padding(
+              padding:  EdgeInsets.only(left: 24.sp,right: 24.sp,top: 24.sp),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
@@ -114,11 +80,11 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                         ),
                         hintText: "Type something...",
                         hintStyle:
-                            TextStyle(color: Color(0xff9CA3AF), fontSize: 14),
+                        TextStyle(color: Color(0xff9CA3AF), fontSize: 14),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.r),
                           borderSide:
-                              BorderSide(color: Color(0xffD1D5DB), width: 3),
+                          BorderSide(color: Color(0xffD1D5DB), width: 3),
                         ),
                         errorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.r),
@@ -127,7 +93,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                         focusedErrorBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.r),
                           borderSide:
-                              BorderSide(color: Color(0xffFF472B), width: 2),
+                          BorderSide(color: Color(0xffFF472B), width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(100.r),
@@ -151,7 +117,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                         builder: (context) => SizedBox(
                           height: 315.h,
                           child: Padding(
-                            padding: EdgeInsets.only(left: 24, top: 36, right: 24),
+                            padding:
+                            EdgeInsets.only(left: 24, top: 36, right: 24),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -177,7 +144,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Unread",
@@ -189,9 +157,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                         ),
                                         SizedBox(width: 235.w),
                                         GestureDetector(
-                                            onTap: () {
-                                              navigateTo(context, UnReadMessagesView());
-                                            },
+                                            onTap: () {},
                                             child: SvgPicture.asset(
                                                 "assets/icons/arrow-right.svg",
                                                 fit: BoxFit.scaleDown))
@@ -212,7 +178,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Spam",
@@ -224,9 +191,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                         ),
                                         SizedBox(width: 243.w),
                                         GestureDetector(
-                                            onTap: () {
-
-                                            },
+                                            onTap: () {},
                                             child: SvgPicture.asset(
                                                 "assets/icons/arrow-right.svg",
                                                 fit: BoxFit.scaleDown))
@@ -247,7 +212,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Archived",
@@ -259,9 +225,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                         ),
                                         SizedBox(width: 224.w),
                                         GestureDetector(
-                                            onTap: () {
-
-                                            },
+                                            onTap: () {},
                                             child: SvgPicture.asset(
                                                 "assets/icons/arrow-right.svg",
                                                 fit: BoxFit.scaleDown))
@@ -282,65 +246,44 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                   ),
                 ],
               ),
-              SizedBox(height: 28.h),
-              SizedBox(
-                height: 527.h,
-                width: 340.w,
-                child: ListView.separated(
-                    itemBuilder: (context, index) => ListTile(
-                        leading: Image.asset(list[index].userImage,
-                            fit: BoxFit.scaleDown),
-                        title: Text(
-                          list[index].userName,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xff111827),
-                            fontWeight: FontWeight.w500,
-                            wordSpacing: 1,
-                          ),
-                        ),
-                        subtitle: Text(
-                          list[index].msg,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Color(0xff6B7280),
-                            fontWeight: FontWeight.w400,
-                            wordSpacing: 1,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                isSelected = !isSelected;
-                                setState(() {});
-                              },
-                              child: Text(
-                                list[index].time,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: isSelected
-                                      ? Color(0xff6B7280)
-                                      : Color(0xff3366FF),
-                                  fontWeight: FontWeight.w400,
-                                  wordSpacing: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    separatorBuilder: (context, index) => Divider(
-                          color: Color(0xffE5E7EB),
-                          thickness: 1,
-                        ),
-                    itemCount: list.length),
+            ),
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 110.h),
+                  Image.asset(
+                    "assets/images/MessageIlustration.png",
+                    fit: BoxFit.scaleDown,
+                    height: 173.h,
+                    width: 142.w,
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    textAlign: TextAlign.center,
+                    "You have not received any\nmessages",
+                    style: TextStyle(
+                      color: Color(0xff111827),
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      wordSpacing: 1,
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    textAlign: TextAlign.center,
+                    "Once your application has reached the interview\nstage, you will get a message from the recruiter.",
+                    style: TextStyle(
+                      color: Color(0xff6B7280),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      wordSpacing: 1,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

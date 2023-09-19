@@ -23,7 +23,6 @@ class _UploadPortfolioViewState extends State<UploadPortfolioView> {
       type: FileType.custom,
       allowedExtensions: ['pdf'],
     );
-
     if (result != null) {
       setState(() {
         selectedFile = File(result.files.single.path!);
@@ -36,12 +35,9 @@ class _UploadPortfolioViewState extends State<UploadPortfolioView> {
 
   Future<void> uploadFile(File file) async {
     String url = 'YOUR_UPLOAD_URL';
-
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.files.add(await http.MultipartFile.fromPath('pdf', file.path));
-
     var response = await request.send();
-
     if (response.statusCode == 200) {
       print('File uploaded successfully');
       // Do something with the response, if needed
@@ -267,44 +263,44 @@ class _UploadPortfolioViewState extends State<UploadPortfolioView> {
                             ),
                           ),
                           SizedBox(height: 24.h),
-                          Container(
-                            width: 295.w,
-                            height: 40.h,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: Color(0xffECF2FF),
-                                border: Border.all(
-                                    color: Color(0xff3366FF), width: 1)),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
+                            Container(
+                              width: 295.w,
+                              height: 40.h,
+                              decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(25),
+                                  color: Color(0xffECF2FF),
+                                  border: Border.all(
+                                      color: Color(0xff3366FF), width: 1)),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                ),
+                                onPressed: pickAndUploadFile,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/export.svg",
+                                      fit: BoxFit.scaleDown,
+                                      color: Color(0xffD6E4FF),
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      "Add file",
+                                      style: TextStyle(
+                                        color: Color(0xffD6E4FF),
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w500,
+                                        wordSpacing: 1,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              onPressed: pickAndUploadFile,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/export.svg",
-                                    fit: BoxFit.scaleDown,
-                                    color: Color(0xffD6E4FF),
-                                  ),
-                                  SizedBox(width: 10.w),
-                                  Text(
-                                    "Add file",
-                                    style: TextStyle(
-                                      color: Color(0xffD6E4FF),
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w500,
-                                      wordSpacing: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),

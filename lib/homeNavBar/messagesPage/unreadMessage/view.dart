@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
-import 'package:jobsque/homeNavBar/messagesPage/unreadMessage/view.dart';
+import 'package:jobsque/homeNavBar/messagesPage/messageIlustration/view.dart';
 
-import '../../core/design/view.dart';
+import '../../../core/design/view.dart';
 
-class MessagesPageView extends StatefulWidget {
-  const MessagesPageView({Key? key}) : super(key: key);
+class UnReadMessagesView extends StatefulWidget {
+  const UnReadMessagesView({Key? key}) : super(key: key);
 
   @override
-  State<MessagesPageView> createState() => _MessagesPageViewState();
+  State<UnReadMessagesView> createState() => _UnReadMessagesViewState();
 }
 
-class _MessagesPageViewState extends State<MessagesPageView> {
+class _UnReadMessagesViewState extends State<UnReadMessagesView> {
   var _controller = TextEditingController();
+
   bool isSelected = false;
 
-  List<MessageModel> list = [
+  List<MessageModel> list2 = [
     MessageModel(
         userImage: "assets/images/TwitterMsg.png",
         userName: "Twitter",
@@ -29,37 +30,22 @@ class _MessagesPageViewState extends State<MessagesPageView> {
         msg: "Let’s keep in touch.",
         time: "12.39"),
     MessageModel(
-        userImage: "assets/images/ShoopeMsg.png",
-        userName: "Shoope",
-        msg: "Thank You David!",
-        time: "09.45"),
-    MessageModel(
         userImage: "assets/images/DanaMsg.png",
         userName: "Dana",
         msg: "Thank you for your attention!",
         time: "Yesterday"),
-    MessageModel(
-        userImage: "assets/images/SlackMsg.png",
-        userName: "Slack",
-        msg: "You: I look forward to hearing from you",
-        time: "12/8"),
-    MessageModel(
-        userImage: "assets/images/FacebookMsg.png",
-        userName: "Facebook",
-        msg: "You: What about the interview stage?",
-        time: "12/8"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.sp),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 24, top: 24, right: 24),
+              child: Row(
                 children: [
                   IconButton(
                     onPressed: () {
@@ -83,8 +69,10 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                   ),
                 ],
               ),
-              SizedBox(height: 24.h),
-              Row(
+            ),
+            Padding(
+              padding: EdgeInsets.all(24.sp),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
@@ -151,7 +139,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                         builder: (context) => SizedBox(
                           height: 315.h,
                           child: Padding(
-                            padding: EdgeInsets.only(left: 24, top: 36, right: 24),
+                            padding:
+                                EdgeInsets.only(left: 24, top: 36, right: 24),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -177,7 +166,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Unread",
@@ -189,9 +179,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                         ),
                                         SizedBox(width: 235.w),
                                         GestureDetector(
-                                            onTap: () {
-                                              navigateTo(context, UnReadMessagesView());
-                                            },
+                                            onTap: () {},
                                             child: SvgPicture.asset(
                                                 "assets/icons/arrow-right.svg",
                                                 fit: BoxFit.scaleDown))
@@ -212,7 +200,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Spam",
@@ -224,9 +213,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                         ),
                                         SizedBox(width: 243.w),
                                         GestureDetector(
-                                            onTap: () {
-
-                                            },
+                                            onTap: () {},
                                             child: SvgPicture.asset(
                                                 "assets/icons/arrow-right.svg",
                                                 fit: BoxFit.scaleDown))
@@ -247,7 +234,8 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           "Archived",
@@ -259,9 +247,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                         ),
                                         SizedBox(width: 224.w),
                                         GestureDetector(
-                                            onTap: () {
-
-                                            },
+                                            onTap: () {},
                                             child: SvgPicture.asset(
                                                 "assets/icons/arrow-right.svg",
                                                 fit: BoxFit.scaleDown))
@@ -282,16 +268,59 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                   ),
                 ],
               ),
-              SizedBox(height: 28.h),
-              SizedBox(
-                height: 527.h,
-                width: 340.w,
+            ),
+            Container(
+              height: 36.h,
+              width: MediaQuery.of(context).size.width,
+              color: Color(0xffE5E7EB),
+              child: Center(
+                child: Row(
+                  children: [
+                    SizedBox(width: 24.w),
+                    GestureDetector(
+                      onTap: () {
+                        navigateTo(context, MessageIlustrationView());
+                      },
+                      child: Text(
+                        'Unread',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Color(0xff6B7280),
+                          fontWeight: FontWeight.w500,
+                          wordSpacing: 1,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 165.w),
+                    GestureDetector(
+                      onTap: () {
+                        isSelected = !isSelected;
+                        setState(() {});
+                      },
+                      child: Text(
+                        'Read all messages',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Color(0xff3366FF),
+                          fontWeight: FontWeight.w500,
+                          wordSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 285.h,
+              child: Padding(
+                padding: EdgeInsets.all(18.sp),
                 child: ListView.separated(
                     itemBuilder: (context, index) => ListTile(
-                        leading: Image.asset(list[index].userImage,
+                        leading: Image.asset(list2[index].userImage,
                             fit: BoxFit.scaleDown),
                         title: Text(
-                          list[index].userName,
+                          list2[index].userName,
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xff111827),
@@ -300,7 +329,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                           ),
                         ),
                         subtitle: Text(
-                          list[index].msg,
+                          list2[index].msg,
                           style: TextStyle(
                             fontSize: 12,
                             color: Color(0xff6B7280),
@@ -320,7 +349,7 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                                 setState(() {});
                               },
                               child: Text(
-                                list[index].time,
+                                list2[index].time,
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: isSelected
@@ -337,10 +366,10 @@ class _MessagesPageViewState extends State<MessagesPageView> {
                           color: Color(0xffE5E7EB),
                           thickness: 1,
                         ),
-                    itemCount: list.length),
+                    itemCount: list2.length),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
