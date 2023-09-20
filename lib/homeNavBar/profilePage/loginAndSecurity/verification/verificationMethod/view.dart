@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/core/logic/helper_methods.dart';
+import 'package:jobsque/homeNavBar/profilePage/loginAndSecurity/verification/verificationCode/view.dart';
 
 class VerificationMethodView extends StatefulWidget {
   const VerificationMethodView({Key? key}) : super(key: key);
@@ -166,7 +168,9 @@ class _VerificationMethodViewState extends State<VerificationMethodView> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          navigateTo(context, VerificationCodeView());
+                        },
                         child: Text(
                           "Next",
                           style: TextStyle(

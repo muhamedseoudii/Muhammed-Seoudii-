@@ -71,6 +71,8 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                      width: 327.w,
                      child: IntlPhoneField(
                        focusNode: focusNode,
+                       dropdownIconPosition: IconPosition.trailing,
+                       keyboardType: TextInputType.number,
                        decoration: InputDecoration(
                          labelText: 'Phone Number',
                          border: OutlineInputBorder(

@@ -29,6 +29,7 @@ dependencies:
   url_launcher: ^6.1.12
   intl_phone_field: ^3.2.0
   file_picker: ^5.5.0
+  sms_otp_auto_verify: ^2.1.0
 
 
 dev_dependencies:

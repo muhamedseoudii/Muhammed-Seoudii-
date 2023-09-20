@@ -256,6 +256,8 @@ class _EditProfileViewState extends State<EditProfileView> {
                         height: 70.h,
                         width: 327.w,
                         child: IntlPhoneField(
+                          dropdownIconPosition: IconPosition.trailing,
+                          keyboardType: TextInputType.number,
                           focusNode: focusNode,
                           decoration: InputDecoration(
                             labelText: 'Phone Number',
