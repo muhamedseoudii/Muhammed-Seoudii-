@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
 import 'package:jobsque/homeNavBar/profilePage/loginAndSecurity/verification/verificationCode/view.dart';
+
+import '../../../../../core/design/customizedButtom/view.dart';
 
 class VerificationMethodView extends StatefulWidget {
   const VerificationMethodView({Key? key}) : super(key: key);
@@ -12,7 +15,15 @@ class VerificationMethodView extends StatefulWidget {
 }
 
 class _VerificationMethodViewState extends State<VerificationMethodView> {
-  bool isToggle = false;
+  bool _switchValue = false;
+
+  List<String> dropdownItems = [
+    'Telephone number (SMS)',
+    'Via Email (Mail)',
+    'Via Phone (Call)'
+  ];
+  String? selectedDropdownItem;
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,21 +89,20 @@ class _VerificationMethodViewState extends State<VerificationMethodView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle = !isToggle;
-                              setState(() {});
-                            },
-                            child: isToggle
-                                ? SvgPicture.asset(
-                                    "assets/icons/ToggleOn.svg",
-                                    fit: BoxFit.scaleDown,
-                                  )
-                                : SvgPicture.asset(
-                                    "assets/icons/ToggleOff.svg",
-                                    fit: BoxFit.scaleDown,
-                                  ),
-                          )
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue = value;
+                                });
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -109,36 +119,60 @@ class _VerificationMethodViewState extends State<VerificationMethodView> {
                   ),
                   SizedBox(height: 10.h),
                   Container(
-                    width: 330.w,
                     height: 60.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        color: Color(0xffFFFFFF),
-                        border: Border.all(
-                          color: Color(0xffD1D5DB),
-                        )),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 16.sp, right: 16.sp, top: 18.sp, bottom: 18.sp),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Telephone number (SMS)',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Color(0xff111827),
-                              fontWeight: FontWeight.w500,
-                              wordSpacing: 1,
+                    width: 330.w,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        suffixIcon: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12),
+                          child: DropdownButtonFormField<String>(
+                            icon: SvgPicture.asset(
+                                "assets/icons/arrow-down.svg",
+                                fit: BoxFit.scaleDown,
+                                color: Colors.black),
+                            value: selectedDropdownItem,
+                            items:
+                            dropdownItems.map((String item) {
+                              return DropdownMenuItem<String>(
+                                value: item,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 15),
+                                  child: Text(
+                                    item,
+                                    style: TextStyle(
+                                        color: Color(0xff1F2937),
+                                        fontSize: 16,
+                                        fontWeight:
+                                        FontWeight.w500),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedDropdownItem = newValue!;
+                              });
+                            },
+                            decoration: InputDecoration(
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
                             ),
                           ),
-                          SvgPicture.asset(
-                            "assets/icons/arrow-down.svg",
-                            width: 20.w,
-                            height: 20.h,
-                            color: Color(0xff111827),
-                          ),
-                        ],
+                        ),
+                        filled: true,
+                        fillColor: Color(0xffFFFFFF),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color(0xffD1D5DB), width: 2.w),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.circular(10.r),
+                          borderSide: BorderSide(
+                              color: Color(0xffD1D5DB)),
+                        ),
                       ),
                     ),
                   ),
@@ -153,35 +187,16 @@ class _VerificationMethodViewState extends State<VerificationMethodView> {
                     ),
                   ),
                   SizedBox(height: 330.h),
-                  Center(
-                    child: Container(
-                      height: 48,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color(0xff3366FF),
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                        onPressed: () {
-                          navigateTo(context, VerificationCodeView());
-                        },
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Color(0xffFFFFFF),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
+                  CustomizeButton(
+                    text: "Next",
+                    color: Color(0xff3366FF),
+                    color1: Color(0xffFFFFFF),
+                    size: 16,
+                    OnClick: () {
+                      navigateTo(context, VerificationCodeView());
+                    },
                   ),
+
                 ],
               ),
             )

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/homeNavBar/view.dart';
 
+import '../../../core/design/customizedButtom/view.dart';
 import '../../../core/logic/helper_methods.dart';
 
 
@@ -85,34 +86,14 @@ class _SuccessPortfolioViewState extends State<SuccessPortfolioView> {
                 ],
               ),
             ),
-            Center(
-              child: Container(
-                height: 48,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Color(0xff3366FF),
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                  onPressed: () {
-                     navigateTo(context, MyHomePage(title: "home"),keepHistory: false);
-                  },
-                  child: Text(
-                    "Back to home",
-                    style: TextStyle(
-                      color: Color(0xffFFFFFF),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
+            CustomizeButton(
+              text: "Back to home",
+              color: Color(0xff3366FF),
+              color1: Color(0xffFFFFFF),
+              size: 16,
+              OnClick: () {
+                navigateTo(context, MyHomePage(title: "home"),keepHistory: false);
+              },
             ),
           ],
         ),

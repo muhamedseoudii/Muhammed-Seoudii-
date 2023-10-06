@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../core/design/customizedButtom/view.dart';
 import '../../../core/design/view.dart';
 import '../../../core/logic/helper_methods.dart';
 import '../../../jobDetail/view.dart';
@@ -671,43 +672,22 @@ class _SearchScreenViewState extends State<SearchScreenView> {
                                         ],
                                       ),
                                       SizedBox(height: 120.w),
-                                      Center(
-                                        child: Container(
-                                          height: 50,
-                                          width: 350,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                25),
-                                            color: Color(0xff3366FF),
-                                          ),
-                                          child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                              elevation: 0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius
-                                                    .circular(25),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              if (foormkey.currentState!
-                                                  .validate()) {
-                                                Navigator.pop(context);
-                                                // Passwords are valid and match
-                                                // Perform further actions like saving the password
-                                                // navigateTo(context, PassResetSuccessview());
-                                              }
-                                            },
-                                            child: Text(
-                                              "Show result",
-                                              style: TextStyle(
-                                                color: Color(0xffFFFFFF),
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                      CustomizeButton(
+                                        text: "Show result",
+                                        color: Color(0xff3366FF),
+                                        color1: Color(0xffFFFFFF),
+                                        size: 16,
+                                        OnClick: () {
+                                          if (foormkey.currentState!
+                                              .validate()) {
+                                            Navigator.pop(context);
+                                            // Passwords are valid and match
+                                            // Perform further actions like saving the password
+                                            // navigateTo(context, PassResetSuccessview());
+                                          }
+                                        },
                                       ),
+
                                     ],
                                   ),
                                 ),
@@ -745,7 +725,7 @@ class _SearchScreenViewState extends State<SearchScreenView> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {
+                                onPressed: ()   {
                                   showModalBottomSheet(
                                     context: context,
                                     backgroundColor: Color(0xffFFFFFF),
@@ -912,36 +892,14 @@ class _SearchScreenViewState extends State<SearchScreenView> {
                                               ],
                                             ),
                                             SizedBox(height: 50.h),
-                                            Center(
-                                              child: Container(
-                                                height: 50,
-                                                width: 350,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(
-                                                      25),
-                                                  color: Color(0xff3366FF),
-                                                ),
-                                                child: ElevatedButton(
-                                                  style: ElevatedButton.styleFrom(
-                                                    elevation: 0,
-                                                    shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius
-                                                          .circular(25),
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                   Navigator.pop(context);
-                                                  },
-                                                  child: Text(
-                                                    "Show result",
-                                                    style: TextStyle(
-                                                      color: Color(0xffFFFFFF),
-                                                      fontSize: 16,
-                                                      fontWeight: FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
+                                            CustomizeButton(
+                                              text: "Show result",
+                                              color: Color(0xff3366FF),
+                                              color1: Color(0xffFFFFFF),
+                                              size: 16,
+                                              OnClick: () {
+                                                Navigator.pop(context);
+                                              },
                                             ),
                                           ],
                                         ),

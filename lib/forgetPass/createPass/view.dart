@@ -5,6 +5,8 @@ import 'package:jobsque/core/logic/helper_methods.dart';
 import 'package:jobsque/forgetPass/passResetSuccess/view.dart';
 import 'package:jobsque/forgetPass/view.dart';
 
+import '../../core/design/customizedButtom/view.dart';
+
 class PasswordScreen extends StatefulWidget {
   @override
   _PasswordScreenState createState() => _PasswordScreenState();
@@ -183,39 +185,20 @@ class _PasswordScreenState extends State<PasswordScreen> {
                         ),
                       ),
                       SizedBox(height: 315.h),
-                      Center(
-                        child: Container(
-                          height: 48,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xff3366FF),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                // Passwords are valid and match
-                                // Perform further actions like saving the password
-                                navigateTo(context, PassResetSuccessview());
-                              }
-                            },
-                            child: Text(
-                              'Reset password',
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
+                      CustomizeButton(
+                        text: "Reset password",
+                        color: Color(0xff3366FF),
+                        color1: Color(0xffFFFFFF),
+                        size: 16,
+                        OnClick: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Passwords are valid and match
+                            // Perform further actions like saving the password
+                            navigateTo(context, PassResetSuccessview());
+                          }
+                        },
                       ),
+                     
                     ],
                   ),
                 ),

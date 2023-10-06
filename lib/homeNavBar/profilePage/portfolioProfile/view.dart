@@ -43,12 +43,13 @@ class _PortfolioProfileViewState extends State<PortfolioProfileView> {
       // Handle the upload failure
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding:  EdgeInsets.all(24.sp),
+          padding: EdgeInsets.all(24.sp),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -130,8 +131,8 @@ class _PortfolioProfileViewState extends State<PortfolioProfileView> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           color: Color(0xffECF2FF),
-                          border: Border.all(
-                              color: Color(0xff3366FF), width: 1)),
+                          border:
+                              Border.all(color: Color(0xff3366FF), width: 1)),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
@@ -178,25 +179,31 @@ class _PortfolioProfileViewState extends State<PortfolioProfileView> {
                   color: Color(0xffFFFFFF),
                 ),
                 child: selectedFile != null
-                    ? Text(
-                  selectedFile!.path,
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Color(0xff111827),
-                      fontWeight: FontWeight.w500),
-                )
+                    ? Row(
+                        children: [
+                          SvgPicture.asset("assets/icons/pdf.svg",
+                              fit: BoxFit.scaleDown),
+                          Text(
+                            selectedFile!.path,
+                            style: TextStyle(
+                                fontSize: 14.sp,
+                                color: Color(0xff111827),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      )
                     : Text(
-                  "No file selected",
-                  style: TextStyle(fontSize: 14.sp,
-                      color: Color(0xff111827),
-                      fontWeight: FontWeight.w500),
-                ),
+                        "No file selected",
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Color(0xff111827),
+                            fontWeight: FontWeight.w500),
+                      ),
               ),
             ],
           ),
         ),
       ),
-
     );
   }
 }

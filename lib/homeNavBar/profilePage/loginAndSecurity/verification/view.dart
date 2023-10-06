@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
 import 'package:jobsque/homeNavBar/profilePage/loginAndSecurity/verification/verificationMethod/view.dart';
+
+import '../../../../core/design/customizedButtom/view.dart';
 
 class VerificationView extends StatefulWidget {
   const VerificationView({Key? key}) : super(key: key);
@@ -12,7 +15,7 @@ class VerificationView extends StatefulWidget {
 }
 
 class _VerificationViewState extends State<VerificationView> {
-  bool isToggle = false;
+  bool _switchValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -78,21 +81,20 @@ class _VerificationViewState extends State<VerificationView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle = !isToggle;
-                              setState(() {});
-                            },
-                            child: isToggle
-                                ? SvgPicture.asset(
-                                    "assets/icons/ToggleOn.svg",
-                                    fit: BoxFit.scaleDown,
-                                  )
-                                : SvgPicture.asset(
-                                    "assets/icons/ToggleOff.svg",
-                                    fit: BoxFit.scaleDown,
-                                  ),
-                          )
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue = value;
+                                });
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -140,35 +142,16 @@ class _VerificationViewState extends State<VerificationView> {
                     ),
                   ),
                   SizedBox(height: 353.h),
-                  Center(
-                    child: Container(
-                      height: 48,
-                      width: 350,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Color(0xff3366FF),
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                        onPressed: () {
-                          navigateTo(context, VerificationMethodView());
-                        },
-                        child: Text(
-                          "Next",
-                          style: TextStyle(
-                            color: Color(0xffFFFFFF),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
+                  CustomizeButton(
+                    text: "Next",
+                    color: Color(0xff3366FF),
+                    color1: Color(0xffFFFFFF),
+                    size: 16,
+                    OnClick: () {
+                      navigateTo(context, VerificationMethodView());
+                    },
                   ),
+
                 ],
               ),
             )

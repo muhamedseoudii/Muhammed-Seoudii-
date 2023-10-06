@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/createAccount/selectCountry/view.dart';
 import 'package:jobsque/homeNavBar/view.dart';
 
+import '../../core/design/customizedButtom/view.dart';
 import '../../core/logic/helper_methods.dart';
 
 class SuccessAccountView extends StatefulWidget {
@@ -66,35 +67,16 @@ class _SuccessAccountViewState extends State<SuccessAccountView> {
                 ],
               ),
             ),
-            Center(
-              child: Container(
-                height: 48,
-                width: 350,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Color(0xff3366FF),
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                  ),
-                  onPressed: () {
-                    navigateTo(context, MyHomePage(title: "home"),keepHistory: false);
-                  },
-                  child: Text(
-                    "Get Started",
-                    style: TextStyle(
-                      color: Color(0xffFFFFFF),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
+            CustomizeButton(
+              text: "Get Started",
+              color: Color(0xff3366FF),
+              color1: Color(0xffFFFFFF),
+              size: 16,
+              OnClick: () {
+                navigateTo(context, MyHomePage(title: "home"),keepHistory: false);
+              },
             ),
+
           ],
         ),
       ),

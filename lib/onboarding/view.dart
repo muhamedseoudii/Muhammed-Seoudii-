@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../core/design/customizedButtom/view.dart';
 import '../signUp/view.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -113,14 +114,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 46),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28)),
-                          backgroundColor: Color(0xff3366FF),
-                          fixedSize: Size.fromHeight(50)),
-                      onPressed: () {
+                    SizedBox(height: 60),
+                    CustomizeButton(
+                      text:currPage == 2 ? "Get Started" : "Next",
+                      color: Color(0xff3366FF),
+                      color1: Color(0xffFFFFFF),
+                      size: 16,
+                      OnClick: () {
                         if (currPage == 2) {
                           Navigator.push(
                               context,
@@ -132,11 +132,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           setState(() {});
                         }
                       },
-                      child: Text(
-                        currPage == 2 ? "Get Started" : "Next",
-                        style: TextStyle(fontSize: 16),
-                      ),
                     ),
+
                   ],
                 ),
               )

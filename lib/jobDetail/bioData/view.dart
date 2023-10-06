@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:jobsque/jobDetail/typeOfWork/view.dart';
 
+import '../../core/design/customizedButtom/view.dart';
 import '../../core/logic/helper_methods.dart';
 
 class BioDataView extends StatefulWidget {
@@ -259,6 +260,7 @@ class _BioDataViewState extends State<BioDataView> {
                         width: 327.w,
                         child: IntlPhoneField(
                           focusNode: focusNode,
+                          dropdownIconPosition: IconPosition.trailing,
                           decoration: InputDecoration(
                             labelText: 'Phone Number',
                             border: OutlineInputBorder(
@@ -276,38 +278,18 @@ class _BioDataViewState extends State<BioDataView> {
                         ),
                       ),
                       SizedBox(height: 110.h),
-                      Center(
-                        child: Container(
-                          height: 50,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xff3366FF),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (foormkey.currentState!.validate()) {
-                                // Passwords are valid and match
-                                // Perform further actions like saving the password
-                                navigateTo(context, TypeOfWorkView());
-                              }
-                            },
-                            child: Text(
-                              "Next",
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
+                      CustomizeButton(
+                        text: "Next",
+                        color: Color(0xff3366FF),
+                        color1: Color(0xffFFFFFF),
+                        size: 16,
+                        OnClick: () {
+                          if (foormkey.currentState!.validate()) {
+                            // Passwords are valid and match
+                            // Perform further actions like saving the password
+                            navigateTo(context, TypeOfWorkView());
+                          }
+                        },
                       ),
                     ],
                   ),

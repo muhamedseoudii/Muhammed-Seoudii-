@@ -20,23 +20,22 @@ class PeopleModel {
 class ProfileModel {
   late String userImage, userName, icon;
 
-  ProfileModel(
-      {required this.userImage,
-        required this.userName,
-        required this.icon,
-       });
+  ProfileModel({
+    required this.userImage,
+    required this.userName,
+    required this.icon,
+  });
 }
-
 
 class MessageModel {
   late String userImage, userName, msg, time;
 
-  MessageModel(
-      {required this.userImage,
-        required this.userName,
-        required this.msg,
-        required this.time,
-      });
+  MessageModel({
+    required this.userImage,
+    required this.userName,
+    required this.msg,
+    required this.time,
+  });
 }
 
 class NotificationModel {
@@ -314,9 +313,7 @@ class _SavedJopState extends State<SavedJop> {
                                     ),
                                     SizedBox(width: 187.w),
                                     GestureDetector(
-                                      onTap: () {
-
-                                      },
+                                        onTap: () {},
                                         child: SvgPicture.asset(
                                             "assets/icons/arrow-right.svg",
                                             fit: BoxFit.scaleDown))
@@ -340,11 +337,10 @@ class _SavedJopState extends State<SavedJop> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SvgPicture.asset(
-                                        "assets/icons/export.svg",
-                                        fit: BoxFit.scaleDown,
+                                      "assets/icons/export.svg",
+                                      fit: BoxFit.scaleDown,
                                       color: Color(0xff111827),
                                     ),
-
                                     SizedBox(width: 14.w),
                                     Text(
                                       "Share via...",
@@ -356,9 +352,7 @@ class _SavedJopState extends State<SavedJop> {
                                     ),
                                     SizedBox(width: 180.w),
                                     GestureDetector(
-                                        onTap: () {
-
-                                        },
+                                        onTap: () {},
                                         child: SvgPicture.asset(
                                             "assets/icons/arrow-right.svg",
                                             fit: BoxFit.scaleDown))
@@ -386,7 +380,6 @@ class _SavedJopState extends State<SavedJop> {
                                       fit: BoxFit.scaleDown,
                                       color: Color(0xff111827),
                                     ),
-
                                     SizedBox(width: 14.w),
                                     Text(
                                       "Cancel save",
@@ -399,7 +392,8 @@ class _SavedJopState extends State<SavedJop> {
                                     SizedBox(width: 170.w),
                                     GestureDetector(
                                         onTap: () {
-                                          navigateTo(context, SavedIlustrationView());
+                                          navigateTo(
+                                              context, SavedIlustrationView());
                                         },
                                         child: SvgPicture.asset(
                                             "assets/icons/arrow-right.svg",
@@ -450,6 +444,288 @@ class _SavedJopState extends State<SavedJop> {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class ProfileContainer extends StatelessWidget {
+  final String icon, title, desc, icon1;
+  final Color backcolor, bordercolor;
+  final double size;
+  var OnClick;
+
+  ProfileContainer(
+      {Key? key,
+      required this.icon,
+      required this.title,
+      required this.desc,
+      required this.icon1,
+      required this.backcolor,
+      required this.bordercolor,
+      required this.OnClick, required this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        onTap: () {
+          OnClick();
+        },
+        child: Container(
+          height: 85.h,
+          width: 330.w,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              color: backcolor,
+              border: Border.all(color: bordercolor, width: 1.w)),
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: 14.sp, right: 14.sp, top: 12.sp, bottom: 12.sp),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SvgPicture.asset(icon, height: 28.h, width: 28.sp),
+                SizedBox(width: 12.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Color(0xff111827),
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        wordSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      desc,
+                      style: TextStyle(
+                        color: Color(0xff6B7280),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        wordSpacing: 1,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: size.w),
+                SvgPicture.asset(
+                  icon1,
+                  width: 20.w,
+                  height: 20.h,
+                ),
+
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class TextFieldApp extends StatelessWidget {
+  final TextEditingController Controller;
+  final double sizeW,sizeH;
+
+  const TextFieldApp({Key? key, required this.Controller, required this.sizeW, required this.sizeH}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: sizeH.h,
+        width: sizeW.w,
+        child: TextFormField(
+          controller: Controller,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Color(0xffFFFFFF),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+              BorderSide(color: Color(0xffD1D5DB), width: 2.w),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: BorderSide(color: Color(0xffFF472B)),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+              BorderSide(color: Color(0xffFF472B), width: 2.w),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+              BorderSide(color: Color(0xffD1D5DB), width: 1.w),
+            ),
+          ),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter your Full Name';
+            }
+            return null;
+          },
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+class ProfileContainer1 extends StatelessWidget {
+  final String image, title, desc, icon, desc1;
+  final Color backcolor, bordercolor;
+  final double size;
+  var OnClick;
+
+  ProfileContainer1(
+      {Key? key,
+        required this.image,
+        required this.title,
+        required this.desc,
+        required this.icon,
+        required this.backcolor,
+        required this.bordercolor,
+        required this.OnClick, required this.size, required this.desc1})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: GestureDetector(
+        onTap: () {
+          OnClick();
+        },
+        child: Container(
+          height: 100.h,
+          width: 330.w,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              color: backcolor,
+              border: Border.all(color: bordercolor, width: 1.w)),
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: 12.sp, right: 12.sp, top: 16.sp, bottom: 16.sp),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(image, height: 44.h, width: 44.sp),
+                SizedBox(width: 12.w),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: Color(0xff111827),
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w400,
+                        wordSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      desc,
+                      style: TextStyle(
+                        color: Color(0xff6B7280),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        wordSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      desc1,
+                      style: TextStyle(
+                        color: Color(0xff6B7280),
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        wordSpacing: 1,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: size.w),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SvgPicture.asset(
+                      icon,
+                      width: 24.w,
+                      height: 24.h,
+                    ),
+                  ],
+                ),
+
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class TextFieldApp1 extends StatelessWidget {
+  final TextEditingController Controller;
+  final double sizeW,sizeH;
+
+  const TextFieldApp1({Key? key, required this.Controller, required this.sizeW, required this.sizeH}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: sizeH.h,
+        width: sizeW.w,
+        child: TextFormField(
+          controller: Controller,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            prefixIcon: SvgPicture.asset(
+                "assets/icons/location.svg",
+                fit: BoxFit.scaleDown),
+            filled: true,
+            fillColor: Color(0xffFFFFFF),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+              BorderSide(color: Color(0xffD1D5DB), width: 2.w),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: BorderSide(color: Color(0xffFF472B)),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+              BorderSide(color: Color(0xffFF472B), width: 2.w),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide:
+              BorderSide(color: Color(0xffD1D5DB), width: 1.w),
+            ),
+          ),
+          validator: (value) {
+            if (value!.isEmpty) {
+              return 'Please enter your Full Name';
+            }
+            return null;
+          },
+        ),
       ),
     );
   }

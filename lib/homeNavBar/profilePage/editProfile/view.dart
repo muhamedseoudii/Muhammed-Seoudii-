@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
+import '../../../core/design/customizedButtom/view.dart';
+
 class EditProfileView extends StatefulWidget {
   const EditProfileView({Key? key}) : super(key: key);
 
@@ -277,38 +279,23 @@ class _EditProfileViewState extends State<EditProfileView> {
                         ),
                       ),
                       SizedBox(height: 70.h),
-                      Center(
-                        child: Container(
-                          height: 50,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xff3366FF),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (foormkey.currentState!.validate()) {
-                                // Passwords are valid and match
-                                // Perform further actions like saving the password
-                                // navigateTo(context, TypeOfWorkView());
-                              }
-                            },
-                            child: Text(
-                              "Save",
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
+                      CustomizeButton(
+                        text: "Save",
+                        color: Color(0xff3366FF),
+                        color1: Color(0xffFFFFFF),
+                        size: 16,
+                        OnClick: () {
+                          if (foormkey.currentState!.validate()) {
+                            // Passwords are valid and match
+                            // Perform further actions like saving the password
+                            // navigateTo(context, TypeOfWorkView());
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("You have changed your Profile"),
+                                duration: Duration(seconds: 5), ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

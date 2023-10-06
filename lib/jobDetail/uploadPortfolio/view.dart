@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:jobsque/jobDetail/uploadPortfolio/successPortfolio/view.dart';
 
+import '../../core/design/customizedButtom/view.dart';
 import '../../core/logic/helper_methods.dart';
 
 class UploadPortfolioView extends StatefulWidget {
@@ -305,34 +306,14 @@ class _UploadPortfolioViewState extends State<UploadPortfolioView> {
                       ),
                     ),
                     SizedBox(height: 50.h),
-                    Center(
-                      child: Container(
-                        height: 50,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Color(0xff3366FF),
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                          ),
-                          onPressed: () {
-                             navigateTo(context, SuccessPortfolioView());
-                          },
-                          child: Text(
-                            "Next",
-                            style: TextStyle(
-                              color: Color(0xffFFFFFF),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
+                    CustomizeButton(
+                      text: "Next",
+                      color: Color(0xff3366FF),
+                      color1: Color(0xffFFFFFF),
+                      size: 16,
+                      OnClick: () {
+                        navigateTo(context, SuccessPortfolioView());
+                      },
                     ),
                   ],
                 )

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quiver/async.dart';
 import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 
 class PinCodeView extends StatefulWidget {
@@ -22,17 +23,38 @@ class _PinCodeViewState extends State<PinCodeView> {
   TextEditingController textEditingController =
       new TextEditingController(text: "");
 
+  int countdown = 59;
+  CountdownTimer? timer;
+
   @override
   void initState() {
     super.initState();
-    _getSignatureCode();
-    _startListeningSms();
+    startCountdown();
+  }
+
+  void startCountdown() {
+    timer = CountdownTimer(
+      Duration(seconds: countdown),
+      Duration(seconds: 1),
+    );
+    timer!.listen((event) {
+      setState(() {
+        countdown = event.remaining.inSeconds;
+      });
+
+      if (countdown == 0) {
+        timer!.cancel();
+      }
+    });
   }
 
   @override
   void dispose() {
+    timer?.cancel();
     super.dispose();
     SmsVerification.stopListening();
+    _getSignatureCode();
+    _startListeningSms();
   }
 
   BoxDecoration get _pinPutDecoration {
@@ -172,7 +194,9 @@ class _PinCodeViewState extends State<PinCodeView> {
                           textStyle:
                               TextStyle(fontSize: 16, color: Color(0xff222741)),
                           defaultDecoration: _pinPutDecoration.copyWith(
-                              border: Border.all(color: Color(0xffD1D5DB),)),
+                              border: Border.all(
+                            color: Color(0xffD1D5DB),
+                          )),
                           selectedDecoration: _pinPutDecoration,
                           onChange: (code) {
                             _onOtpCallBack(code, false);
@@ -181,21 +205,19 @@ class _PinCodeViewState extends State<PinCodeView> {
                     Row(
                       children: [
                         Text(
-                          "Resend code ",
+                          "Resend code",
                           style: TextStyle(
-                            color: Color(0xff9CA3AF),
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                            wordSpacing: 1,
-                          ),
+                              color: Color(0xff9CA3AF),
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500),
                         ),
+                        SizedBox(width: 4.w),
                         Text(
-                          "42s",
+                          countdown > 0 ? " $countdown s" : "Again",
                           style: TextStyle(
                             color: Color(0xff3366FF),
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            wordSpacing: 1,
                           ),
                         ),
                       ],

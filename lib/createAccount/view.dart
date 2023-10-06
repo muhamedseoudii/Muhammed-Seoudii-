@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
 import 'package:jobsque/createAccount/selectWork/view.dart';
-import 'package:jobsque/forgetPass/view.dart';
 import 'package:jobsque/signUp/view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../core/design/customizedButtom/view.dart';
 import '../createAccount/view.dart';
 
 class SignInView extends StatefulWidget {
@@ -251,39 +251,20 @@ class _SignInViewState extends State<SignInView> {
                   ],
                 ),
                 SizedBox(height: 20.h),
-                Center(
-                  child: Container(
-                    height: 48,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Color(0xff3366FF),
-                    ),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (foormkey.currentState!.validate()) {
-                          // Passwords are valid and match
-                          // Perform further actions like saving the password
-                           navigateTo(context, SelectWorkView());
-                        }
-                      },
-                      child: Text(
-                        "Create account",
-                        style: TextStyle(
-                          color: Color(0xffFFFFFF),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                CustomizeButton(
+                  text: "Create account",
+                  color: Color(0xff3366FF),
+                  color1: Color(0xffFFFFFF),
+                  size: 16,
+                  OnClick: () {
+                    if (foormkey.currentState!.validate()) {
+                      // Passwords are valid and match
+                      // Perform further actions like saving the password
+                      navigateTo(context, SelectWorkView());
+                    }
+                  },
                 ),
+
                 SizedBox(height: 20.h),
                 Center(
                   child: SvgPicture.asset(

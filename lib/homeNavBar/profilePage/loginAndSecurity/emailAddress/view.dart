@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/design/customizedButtom/view.dart';
+
 class EmailAddressView extends StatefulWidget {
   const EmailAddressView({Key? key}) : super(key: key);
 
@@ -110,38 +112,24 @@ class _EmailAddressViewState extends State<EmailAddressView> {
                      ),
                    ),
                    SizedBox(height: 498.h),
-                   Center(
-                     child: Container(
-                       height: 48,
-                       width: 350,
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(25),
-                         color: Color(0xff3366FF),
-                       ),
-                       child: ElevatedButton(
-                         style: ElevatedButton.styleFrom(
-                           elevation: 0,
-                           shape: RoundedRectangleBorder(
-                             borderRadius: BorderRadius.circular(25),
-                           ),
-                         ),
-                         onPressed: () {
-                           if (formmKey.currentState!.validate()) {
-                             // Passwords are valid and match
-                             // Perform further actions like saving the password
-                             // navigateTo(context, CheckEmailView());
-                           }
-                         },
-                         child: Text(
-                           "Save",
-                           style: TextStyle(
-                             color: Color(0xffFFFFFF),
-                             fontSize: 16,
-                             fontWeight: FontWeight.w500,
-                           ),
-                         ),
-                       ),
-                     ),
+                   CustomizeButton(
+                     text: "Save",
+                     color: Color(0xff3366FF),
+                     color1: Color(0xffFFFFFF),
+                     size: 16,
+                     OnClick: () {
+                       if (formmKey.currentState!.validate()) {
+                         // Passwords are valid and match
+                         // Perform further actions like saving the password
+                         // navigateTo(context, TypeOfWorkView());
+                         ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(
+                             content: Text("Your Email has been saved Successfully..."),
+                             duration: Duration(seconds: 5), ),
+
+                         );
+                       }
+                     },
                    ),
                  ],
                ),

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jobsque/completeProfile/view.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
 import 'package:jobsque/homeNavBar/profilePage/editProfile/view.dart';
+import 'package:jobsque/homeNavBar/profilePage/helpCenter/view.dart';
 import 'package:jobsque/homeNavBar/profilePage/language/view.dart';
 import 'package:jobsque/homeNavBar/profilePage/loginAndSecurity/view.dart';
 import 'package:jobsque/homeNavBar/profilePage/notificationsProfile/view.dart';
 import 'package:jobsque/homeNavBar/profilePage/portfolioProfile/view.dart';
+import 'package:jobsque/homeNavBar/profilePage/privacyPolicy/view.dart';
+import 'package:jobsque/homeNavBar/profilePage/termsAndConditions/view.dart';
 
 import 'package:jobsque/signUp/view.dart';
 
@@ -219,14 +223,19 @@ class ProfilePageView extends StatelessWidget {
                             wordSpacing: 1,
                           ),
                         ),
-                        Text(
-                          textAlign: TextAlign.center,
-                          "Edit",
-                          style: TextStyle(
-                            color: Color(0xff3366FF),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            wordSpacing: 1,
+                        GestureDetector(
+                          onTap: () {
+                            navigateTo(context, CompleteProfileView());
+                          },
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            "Edit",
+                            style: TextStyle(
+                              color: Color(0xff3366FF),
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              wordSpacing: 1,
+                            ),
                           ),
                         ),
                       ],
@@ -524,7 +533,7 @@ class ProfilePageView extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // navigateTo(context, EditProfileView());
+                            navigateTo(context, HelpCenterView());
                           },
                           child: Container(
                             width: 330.w,
@@ -556,7 +565,7 @@ class ProfilePageView extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // navigateTo(context, EditProfileView());
+                            navigateTo(context, TermsAndConditionsView());
                           },
                           child: Container(
                             width: 330.w,
@@ -588,7 +597,7 @@ class ProfilePageView extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // navigateTo(context, EditProfileView());
+                            navigateTo(context, PrivacyPolicyView());
                           },
                           child: Container(
                             width: 330.w,

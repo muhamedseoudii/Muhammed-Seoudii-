@@ -17,6 +17,7 @@ void navigateTo(context, page,
         (route) => keepHistory);
   }
 }
+
 MaterialColor getMaterialColor(Color color) {
   final int red = color.red;
   final int green = color.green;

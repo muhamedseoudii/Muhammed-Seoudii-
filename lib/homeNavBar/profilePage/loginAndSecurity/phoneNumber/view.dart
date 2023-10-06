@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+
+import '../../../../core/design/customizedButtom/view.dart';
 
 class PhoneNumberView extends StatefulWidget {
   const PhoneNumberView({Key? key}) : super(key: key);
@@ -13,7 +16,7 @@ class PhoneNumberView extends StatefulWidget {
 class _PhoneNumberViewState extends State<PhoneNumberView> {
 
   FocusNode focusNode = FocusNode();
-  bool isToggle = true;
+  bool _switchValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
                    Text(
-                     "Main e-mail address",
+                     "Main phone number",
                      style: TextStyle(
                        color: Color(0xff111827),
                        fontSize: 16.sp,
@@ -106,54 +109,38 @@ class _PhoneNumberViewState extends State<PhoneNumberView> {
                              wordSpacing: 1,
                            ),
                          ),
-                         GestureDetector(
-                           onTap: () {
-                             isToggle = !isToggle;
-                             setState(() {});
-                           },
-                           child: isToggle
-                               ? SvgPicture.asset(
-                             "assets/icons/ToggleOn.svg",
-                             fit: BoxFit.scaleDown,
-                           )
-                               : SvgPicture.asset(
-                             "assets/icons/ToggleOff.svg",
-                             fit: BoxFit.scaleDown,
+                         Transform.scale(
+                           scaleX: 1.0.sp,
+                           scaleY: 0.9.sp,
+                           child: CupertinoSwitch(
+                             activeColor: Color(0xff3366FF),
+                             thumbColor: Color(0xffD6E4FF),
+                             value: _switchValue,
+                             onChanged: (bool value) {
+                               setState(() {
+                                 _switchValue = value;
+                               });
+                             },
                            ),
-                         )
+                         ),
                        ],
                      ),
                    ),
                    SizedBox(height: 447.h),
-                   Center(
-                     child: Container(
-                       height: 48,
-                       width: 350,
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(25),
-                         color: Color(0xff3366FF),
-                       ),
-                       child: ElevatedButton(
-                         style: ElevatedButton.styleFrom(
-                           elevation: 0,
-                           shape: RoundedRectangleBorder(
-                             borderRadius: BorderRadius.circular(25),
-                           ),
-                         ),
-                         onPressed: () {
-
-                         },
-                         child: Text(
-                           "Save",
-                           style: TextStyle(
-                             color: Color(0xffFFFFFF),
-                             fontSize: 16,
-                             fontWeight: FontWeight.w500,
-                           ),
-                         ),
-                       ),
-                     ),
+                   CustomizeButton(
+                     text: "Save",
+                     color: Color(0xff3366FF),
+                     color1: Color(0xffFFFFFF),
+                     size: 16,
+                     OnClick: () {
+                         ScaffoldMessenger.of(context).showSnackBar(
+                           SnackBar(
+                             content: Text("Your Phone Number has been saved Successfully..."),
+                             duration: Duration(seconds: 5), ),
+                         );
+                     },
                    ),
+
                  ],
                ),
              )

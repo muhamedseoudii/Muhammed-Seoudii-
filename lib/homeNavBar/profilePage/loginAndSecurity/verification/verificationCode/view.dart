@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:jobsque/homeNavBar/profilePage/loginAndSecurity/verification/pinCode/view.dart';
 
+import '../../../../../core/design/customizedButtom/view.dart';
 import '../../../../../core/logic/helper_methods.dart';
 
 class VerificationCodeView extends StatefulWidget {
@@ -173,38 +174,18 @@ class _VerificationCodeViewState extends State<VerificationCodeView> {
                         ),
                       ),
                       SizedBox(height: 365.h),
-                      Center(
-                        child: Container(
-                          height: 48,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xff3366FF),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (formkey.currentState!.validate()) {
-                                // Passwords are valid and match
-                                // Perform further actions like saving the password
-                                 navigateTo(context, PinCodeView());
-                              }
-                            },
-                            child: Text(
-                              'Send Code',
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
+                      CustomizeButton(
+                        text: "Send Code",
+                        color: Color(0xff3366FF),
+                        color1: Color(0xffFFFFFF),
+                        size: 16,
+                        OnClick: () {
+                          if (formkey.currentState!.validate()) {
+                            // Passwords are valid and match
+                            // Perform further actions like saving the password
+                            navigateTo(context, PinCodeView());
+                          }
+                        },
                       ),
                     ],
                   ),

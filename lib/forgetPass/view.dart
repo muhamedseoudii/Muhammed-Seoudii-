@@ -5,6 +5,8 @@ import 'package:jobsque/core/logic/helper_methods.dart';
 import 'package:jobsque/forgetPass/checkEmail/view.dart';
 import 'package:jobsque/signUp/view.dart';
 
+import '../core/design/customizedButtom/view.dart';
+
 class ForgetPasswordView extends StatefulWidget {
    ForgetPasswordView({Key? key}) : super(key: key);
 
@@ -142,39 +144,20 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   ],
                 ),
                 SizedBox(height: 20.h),
-                Center(
-                  child: Container(
-                    height: 48,
-                    width: 350,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Color(0xff3366FF),
-                    ),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (formmKey.currentState!.validate()) {
-                          // Passwords are valid and match
-                          // Perform further actions like saving the password
-                          navigateTo(context, CheckEmailView());
-                        }
-                      },
-                      child: Text(
-                        "Request password reset",
-                        style: TextStyle(
-                          color: Color(0xffFFFFFF),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
+                CustomizeButton(
+                  text: "Request password reset",
+                  color: Color(0xff3366FF),
+                  color1: Color(0xffFFFFFF),
+                  size: 16,
+                  OnClick: () {
+                    if (formmKey.currentState!.validate()) {
+                      // Passwords are valid and match
+                      // Perform further actions like saving the password
+                      navigateTo(context, CheckEmailView());
+                    }
+                  },
                 ),
+
               ],
             ),
           ),

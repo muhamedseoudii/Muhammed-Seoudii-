@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../core/design/customizedButtom/view.dart';
+
 class ChangePasswordView extends StatefulWidget {
   const ChangePasswordView({Key? key}) : super(key: key);
 
@@ -259,6 +261,25 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         ),
                       ),
                       SizedBox(height: 290.h),
+                      CustomizeButton(
+                        text: "Reset password",
+                        color: Color(0xff3366FF),
+                        color1: Color(0xffFFFFFF),
+                        size: 16,
+                        OnClick: () {
+                          if (foormkey.currentState!.validate()) {
+                            // Passwords are valid and match
+                            // Perform further actions like saving the password
+                            // navigateTo(context, PassResetSuccessview());
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Your password has been succesfully Reset..."),
+                             duration: Duration(seconds: 5), ),
+
+                            );
+                          }
+                        },
+                      ),
                       Center(
                         child: Container(
                           height: 48,

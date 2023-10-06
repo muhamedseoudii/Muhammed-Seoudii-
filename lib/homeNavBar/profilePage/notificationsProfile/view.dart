@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -11,14 +12,15 @@ class NotificationProfileView extends StatefulWidget {
 }
 
 class _NotificationProfileViewState extends State<NotificationProfileView> {
-  bool isToggle = false;
-  bool isToggle1 = false;
-  bool isToggle2 = false;
-  bool isToggle3 = false;
-  bool isToggle4 = false;
-  bool isToggle5 = true;
-  bool isToggle6 = true;
-  bool isToggle7 = true;
+  bool _switchValue = false;
+  bool _switchValue1 = false;
+  bool _switchValue2 = false;
+  bool _switchValue3 = false;
+  bool _switchValue4 = false;
+  bool _switchValue5 = true;
+  bool _switchValue6 = true;
+  bool _switchValue7 = true;
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,21 +101,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle = !isToggle;
-                              setState(() {});
-                            },
-                            child: isToggle
-                                ? SvgPicture.asset(
-                                    "assets/icons/ToggleOn.svg",
-                                    fit: BoxFit.scaleDown,
-                                  )
-                                : SvgPicture.asset(
-                                    "assets/icons/ToggleOff.svg",
-                                    fit: BoxFit.scaleDown,
-                                  ),
-                          )
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue = value;
+                                });
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -137,21 +138,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle1 = !isToggle1;
-                              setState(() {});
-                            },
-                            child: isToggle1
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue1,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue1 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -175,21 +175,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle2 = !isToggle2;
-                              setState(() {});
-                            },
-                            child: isToggle2
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue2,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue2 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -213,21 +212,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle3 = !isToggle3;
-                              setState(() {});
-                            },
-                            child: isToggle3
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue3,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue3 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -251,21 +249,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle4 = !isToggle4;
-                              setState(() {});
-                            },
-                            child: isToggle4
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue4,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue4 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -320,21 +317,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle5 = !isToggle5;
-                              setState(() {});
-                            },
-                            child: isToggle5
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue5,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue5 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -358,21 +354,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle6 = !isToggle6;
-                              setState(() {});
-                            },
-                            child: isToggle6
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue6,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue6 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -396,21 +391,20 @@ class _NotificationProfileViewState extends State<NotificationProfileView> {
                               wordSpacing: 1,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              isToggle7 = !isToggle;
-                              setState(() {});
-                            },
-                            child: isToggle7
-                                ? SvgPicture.asset(
-                              "assets/icons/ToggleOn.svg",
-                              fit: BoxFit.scaleDown,
-                            )
-                                : SvgPicture.asset(
-                              "assets/icons/ToggleOff.svg",
-                              fit: BoxFit.scaleDown,
+                          Transform.scale(
+                            scaleX: 1.0.sp,
+                            scaleY: 0.9.sp,
+                            child: CupertinoSwitch(
+                              activeColor: Color(0xff3366FF),
+                              thumbColor: Color(0xffD6E4FF),
+                              value: _switchValue7,
+                              onChanged: (bool value) {
+                                setState(() {
+                                  _switchValue7 = value;
+                                });
+                              },
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
