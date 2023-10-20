@@ -1,10 +1,15 @@
-import 'dart:async';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:jobsque/homeNavBar/profilePage/loginAndSecurity/view.dart';
+import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_field_style.dart';
+import 'package:otp_text_field/style.dart';
 import 'package:quiver/async.dart';
-import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
+
+import '../../../../../core/design/customizedButtom/view.dart';
+import '../../../../../core/logic/helper_methods.dart';
 
 class PinCodeView extends StatefulWidget {
   const PinCodeView({Key? key}) : super(key: key);
@@ -14,11 +19,6 @@ class PinCodeView extends StatefulWidget {
 }
 
 class _PinCodeViewState extends State<PinCodeView> {
-  int _otpCodeLength = 6;
-  bool _isLoadingButton = false;
-  bool _enableButton = false;
-  String _otpCode = "";
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final intRegex = RegExp(r'\d+', multiLine: true);
   TextEditingController textEditingController =
       new TextEditingController(text: "");
@@ -52,73 +52,37 @@ class _PinCodeViewState extends State<PinCodeView> {
   void dispose() {
     timer?.cancel();
     super.dispose();
-    SmsVerification.stopListening();
-    _getSignatureCode();
-    _startListeningSms();
   }
 
-  BoxDecoration get _pinPutDecoration {
-    return BoxDecoration(
-      border: Border.all(color: Theme.of(context).primaryColor),
-      borderRadius: BorderRadius.circular(15.0),
-    );
-  }
+  final otpController = TextEditingController();
 
-  /// get signature code
-  _getSignatureCode() async {
-    String? signature = await SmsVerification.getAppSignature();
-    print("signature $signature");
-  }
+  bool isLoading = false;
+  bool isFailed = false;
 
-  /// listen sms
-  _startListeningSms() {
-    SmsVerification.startListeningSms().then((message) {
-      setState(() {
-        _otpCode = SmsVerification.getCode(message, intRegex);
-        textEditingController.text = _otpCode;
-        _onOtpCallBack(_otpCode, true);
-      });
-    });
-  }
-
-  _onSubmitOtp() {
-    setState(() {
-      _isLoadingButton = !_isLoadingButton;
-      _verifyOtpCode();
-    });
-  }
-
-  _onClickRetry() {
-    _startListeningSms();
-  }
-
-  _onOtpCallBack(String otpCode, bool isAutofill) {
-    setState(() {
-      this._otpCode = otpCode;
-      if (otpCode.length == _otpCodeLength && isAutofill) {
-        _enableButton = false;
-        _isLoadingButton = true;
-        _verifyOtpCode();
-      } else if (otpCode.length == _otpCodeLength && !isAutofill) {
-        _enableButton = true;
-        _isLoadingButton = false;
-      } else {
-        _enableButton = false;
-      }
-    });
-  }
-
-  _verifyOtpCode() {
-    FocusScope.of(context).requestFocus(new FocusNode());
-    Timer(Duration(milliseconds: 4000), () {
-      setState(() {
-        _isLoadingButton = false;
-        _enableButton = false;
-      });
-
-      // _scaffoldKey.currentState?.showSnackBar(
-      //     SnackBar(content: Text("Verification OTP Code $_otpCode Success")));
-    });
+  login() async {
+    isLoading = true;
+    setState(() {});
+    try {
+      final response = await Dio().post(
+        "https://project2.amit-learning.com/api/auth/otp",
+        data: {
+          "email": otpController.text,
+        },
+      );
+      print(response.data);
+    } on DioException {
+      isFailed = true;
+    }
+    isLoading = false;
+    setState(() {});
+    isFailed
+        ? ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Failed!"),
+              duration: Duration(seconds: 10),
+            ),
+          )
+        : navigateTo(context, LoginAndSecurityView());
   }
 
   @override
@@ -182,26 +146,36 @@ class _PinCodeViewState extends State<PinCodeView> {
                       ),
                     ),
                     SizedBox(height: 20.h),
-                    Center(
-                      child: TextFieldPin(
-                          textController: textEditingController,
-                          autoFocus: true,
-                          codeLength: _otpCodeLength,
-                          alignment: MainAxisAlignment.center,
-                          defaultBoxSize: 50.0,
-                          margin: 5,
-                          selectedBoxSize: 50.0,
-                          textStyle:
-                              TextStyle(fontSize: 16, color: Color(0xff222741)),
-                          defaultDecoration: _pinPutDecoration.copyWith(
-                              border: Border.all(
-                            color: Color(0xffD1D5DB),
-                          )),
-                          selectedDecoration: _pinPutDecoration,
-                          onChange: (code) {
-                            _onOtpCallBack(code, false);
-                          }),
+                    OTPTextField(
+                      // controller: otpController.text,
+                      length: 4,
+                      keyboardType: TextInputType.number,
+                      onChanged: (String code) {
+                        code = otpController.text;
+                      },
+                      outlineBorderRadius: 10.r,
+                      otpFieldStyle: OtpFieldStyle(
+                          enabledBorderColor: Color(0xffD1D5DB),
+                          errorBorderColor: Color(0xffFF472B)),
+                      width: MediaQuery.of(context).size.width,
+                      fieldWidth: 45.w,
+                      style: TextStyle(fontSize: 14.sp),
+                      textFieldAlignment: MainAxisAlignment.spaceAround,
+                      fieldStyle: FieldStyle.box,
+                      onCompleted: (String pin) {
+                        showDialog(
+                            context: context,
+                            builder: (context){
+                              return AlertDialog(
+                                title: Text("Verification Pin Code"),
+                                content: Text('Code entered is $pin'),
+                              );
+                            }
+                        );
+
+                      },
                     ),
+                    SizedBox(height: 16.h),
                     Row(
                       children: [
                         Text(
@@ -223,42 +197,21 @@ class _PinCodeViewState extends State<PinCodeView> {
                       ],
                     ),
                     SizedBox(
-                      height: 400.h,
+                      height: 453.h,
                     ),
-                    Center(
-                      child: Container(
-                        height: 48,
-                        width: 350,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Color(0xff3366FF),
-                        ),
-                        child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            onPressed: _enableButton ? _onSubmitOtp : null,
-                            child: _setUpButtonChild(),
-                            disabledTextColor: Color(0xff6B7280),
+                    isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : CustomizeButton(
+                            text: "Verify",
                             color: Color(0xff3366FF),
-                            disabledColor: Color(0xffD1D5DB)),
-                      ),
-                    ),
-                    Container(
-                      width: double.maxFinite,
-                      child: TextButton(
-                        onPressed: _onClickRetry,
-                        child: Text(
-                          "Retry",
-                          style: TextStyle(
-                            color: Color(0xff3366FF),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            wordSpacing: 1,
+                            color1: Color(0xffFFFFFF),
+                            size: 16,
+                            OnClick: () {
+                              login();
+                            },
                           ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               )
@@ -267,22 +220,5 @@ class _PinCodeViewState extends State<PinCodeView> {
         ),
       ),
     );
-  }
-
-  Widget _setUpButtonChild() {
-    if (_isLoadingButton) {
-      return Container(
-        width: 19,
-        height: 19,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-        ),
-      );
-    } else {
-      return Text(
-        "Verify",
-        style: TextStyle(color: Colors.white),
-      );
-    }
   }
 }

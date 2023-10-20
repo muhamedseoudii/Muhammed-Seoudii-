@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../core/design/customizedButtom/view.dart';
 import '../core/design/view.dart';
 import '../core/logic/helper_methods.dart';
+import 'model.dart';
 
 class JobDetailView extends StatefulWidget {
   const JobDetailView({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class _JobDetailViewState extends State<JobDetailView>
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
+    getCompany();
   }
 
   @override
@@ -31,7 +34,7 @@ class _JobDetailViewState extends State<JobDetailView>
     super.dispose();
   }
 
-  Future<void> _launchURL(String url) async {
+  Future<void> launchURL(String url) async {
     final Uri uri = Uri(scheme: "https", host: url);
     if (!await launchUrl(
       uri,
@@ -41,10 +44,10 @@ class _JobDetailViewState extends State<JobDetailView>
     }
   }
 
-  void _launchEmail() async {
+  void launchEmail() async {
     final Uri emailUri = Uri(
       scheme: 'mailto',
-      path: 'twitter@mail.com',
+      path: model!.list[0].email,
       queryParameters: {
         'subject': 'Hello',
         'body': 'This is the body of the email.'
@@ -104,6 +107,39 @@ class _JobDetailViewState extends State<JobDetailView>
   ];
   String? selectedDropdownItem;
 
+  bool isLoading = false;
+  bool isFailed = false;
+  CompanyData? model;
+
+  Future<void> getCompany() async {
+    isLoading = true;
+    setState(() {});
+    try {
+      var response = await Dio().get(
+          "https://project2.amit-learning.com/api/showCompany",
+          options: Options(headers: {
+            'Authorization':
+                "Bearer 1548|ncWnCJsxHDyDvDKiCRsLGfqBNPznwPj6v2QcsC90"
+          }));
+      model = CompanyData.fromJson(response.data);
+      isLoading = false;
+      setState(() {});
+    } on DioException {
+      isFailed = true;
+    }
+    isLoading = false;
+
+    setState(() {});
+    isFailed
+        ? ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Failed!"),
+              duration: Duration(seconds: 20),
+            ),
+          )
+        : navigateTo(context, BioDataView());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,7 +189,7 @@ class _JobDetailViewState extends State<JobDetailView>
                   SizedBox(height: 12.h),
                   Text(
                     textAlign: TextAlign.center,
-                    "Senior UI Designer",
+                    model!.list[0].name,
                     style: TextStyle(
                       color: Color(0xff111827),
                       fontSize: 20.sp,
@@ -317,138 +353,158 @@ class _JobDetailViewState extends State<JobDetailView>
                                 ),
                               ],
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Contact Us',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff111827),
-                                    wordSpacing: 1,
-                                  ),
-                                ),
-                                SizedBox(height: 8.h),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: _launchEmail,
-                                      child: Container(
-                                        width: 160.h,
-                                        height: 56.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10.r),
-                                          color: Color(0xffFFFFFF),
-                                          border: Border.all(
-                                              color: Color(0xffE5E7EB), width: 2),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 12, top: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Email",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Color(0xff9CA3AF),
-                                                  wordSpacing: 1,
-                                                ),
-                                              ),
-                                              SizedBox(height: 5.h),
-                                              Text(
-                                                "twitter@mail.com",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff111827),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                            isLoading
+                                ? Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Contact Us',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xff111827),
+                                          wordSpacing: 1,
                                         ),
                                       ),
-                                    ),
-                                    SizedBox(width: 13.w),
-                                    GestureDetector(
-                                      onTap: () {
-                                        _launchURL("www.twitter .com");
-                                      },
-                                      child: Container(
-                                        width: 160.h,
-                                        height: 56.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10.r),
-                                          color: Color(0xffFFFFFF),
-                                          border: Border.all(
-                                              color: Color(0xffE5E7EB), width: 2),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 12, top: 10),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Website",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: Color(0xff9CA3AF),
-                                                  wordSpacing: 1,
+                                      SizedBox(height: 8.h),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: launchEmail,
+                                            child: Container(
+                                              width: 160.h,
+                                              height: 65.w,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                color: Color(0xffFFFFFF),
+                                                border: Border.all(
+                                                    color: Color(0xffE5E7EB),
+                                                    width: 2),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12, top: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Email",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color:
+                                                            Color(0xff9CA3AF),
+                                                        wordSpacing: 1,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5.h),
+                                                    Text(
+                                                      // "twitter@mail.com"
+                                                      model!.list[0].email,
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color:
+                                                            Color(0xff111827),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              SizedBox(height: 5.h),
-                                              Text(
-                                                "https://twitter.com",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color(0xff111827),
-                                                ),
-                                              ),
-                                            ],
+                                            ),
                                           ),
+                                          SizedBox(width: 13.w),
+                                          GestureDetector(
+                                            onTap: () {
+                                              launchURL("www.amitexperts.com");
+                                            },
+                                            child: Container(
+                                              width: 160.h,
+                                              height: 65.w,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                                color: Color(0xffFFFFFF),
+                                                border: Border.all(
+                                                    color: Color(0xffE5E7EB),
+                                                    width: 2),
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12, top: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Website",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color:
+                                                            Color(0xff9CA3AF),
+                                                        wordSpacing: 1,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 5.h),
+                                                    Text(
+                                                      model!.list[0].website,
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color:
+                                                            Color(0xff111827),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 24.h),
+                                      Text(
+                                        'About Company',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xff111827),
+                                          wordSpacing: 1,
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 24.h),
-                                Text(
-                                  'About Company',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xff111827),
-                                    wordSpacing: 1,
+                                      SizedBox(height: 16.h),
+                                      Text(
+                                          model!.list[0].about,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xff4B5563),
+                                          wordSpacing: 1,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                SizedBox(height: 16.h),
-                                Text(
-                                  "Understanding Recruitment is an award-winning technology,\nsoftware and digital recruitment consultancy with headquarters\nin St. Albans, Hertfordshire.We also have a US office in Boston,\nMassachusetts specialising in working closely with highly skilled\nindividuals seeking their next career move within Next Gen Tech,\nBackend Engineering, and Artificial Intelligence.We recently\ncelebrated our first decade in business and over the years have\nbeen recognised with several industry awards including 'Best\nStaffing Firm to Work For 2018'​ at the SIA Awards for the third\nconsecutive year and ‘Business of the Year 2017’ at the SME\nHertfordshire Business Awards.Our teams of specialists operate\nacross all areas of Technology and Digital, including Java,\nJavaScript, Python, .Net, DevOps & SRE, SDET, Artificial Intelligence,\nMachine Learning, AI, Digital, Quantum Computing, Hardware\nAcceleration,Digital, Charity, Fintech, and the Public Sector.",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff4B5563),
-                                    wordSpacing: 1,
-                                  ),
-                                ),
-                              ],
-                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Column(
                                   children: [
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Container(
                                           height: 60.h,
@@ -489,38 +545,47 @@ class _JobDetailViewState extends State<JobDetailView>
                                               suffixIcon: Container(
                                                 padding: EdgeInsets.symmetric(
                                                     horizontal: 12),
-                                                child: DropdownButtonFormField<String>(
+                                                child: DropdownButtonFormField<
+                                                    String>(
                                                   icon: SvgPicture.asset(
                                                       "assets/icons/arrow-down.svg",
                                                       fit: BoxFit.scaleDown,
                                                       color: Colors.black),
                                                   value: selectedDropdownItem,
-                                                  items:
-                                                      dropdownItems.map((String item) {
-                                                    return DropdownMenuItem<String>(
+                                                  items: dropdownItems
+                                                      .map((String item) {
+                                                    return DropdownMenuItem<
+                                                        String>(
                                                       value: item,
                                                       child: Padding(
-                                                        padding: const EdgeInsets.only(
-                                                            left: 15),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 15),
                                                         child: Text(
                                                           item,
                                                           style: TextStyle(
-                                                              color: Color(0xff111827),
+                                                              color: Color(
+                                                                  0xff111827),
                                                               fontSize: 12,
                                                               fontWeight:
-                                                                  FontWeight.w400),
+                                                                  FontWeight
+                                                                      .w400),
                                                         ),
                                                       ),
                                                     );
                                                   }).toList(),
-                                                  onChanged: (String? newValue) {
+                                                  onChanged:
+                                                      (String? newValue) {
                                                     setState(() {
-                                                      selectedDropdownItem = newValue!;
+                                                      selectedDropdownItem =
+                                                          newValue!;
                                                     });
                                                   },
                                                   decoration: InputDecoration(
-                                                    enabledBorder: InputBorder.none,
-                                                    focusedBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
+                                                    focusedBorder:
+                                                        InputBorder.none,
                                                   ),
                                                 ),
                                               ),
@@ -528,11 +593,13 @@ class _JobDetailViewState extends State<JobDetailView>
                                               fillColor: Color(0xffFFFFFF),
                                               focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
-                                                    color: Color(0xffD1D5DB), width: 2.w),
+                                                    color: Color(0xffD1D5DB),
+                                                    width: 2.w),
                                               ),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(100.r),
+                                                    BorderRadius.circular(
+                                                        100.r),
                                                 borderSide: BorderSide(
                                                     color: Color(0xffD1D5DB)),
                                               ),
@@ -547,57 +614,59 @@ class _JobDetailViewState extends State<JobDetailView>
                                   height: 400.h,
                                   child: ListView.separated(
                                       itemBuilder: (context, index) => ListTile(
-                                            leading: Image.asset(
-                                                list[index].userImage,
-                                                fit: BoxFit.scaleDown),
-                                            title: Text(
-                                              list[index].userName,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Color(0xff111827),
-                                                fontWeight: FontWeight.w500,
-                                                wordSpacing: 1,
-                                              ),
+                                          leading: Image.asset(
+                                              list[index].userImage,
+                                              fit: BoxFit.scaleDown),
+                                          title: Text(
+                                            list[index].userName,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xff111827),
+                                              fontWeight: FontWeight.w500,
+                                              wordSpacing: 1,
                                             ),
-                                            subtitle: Text(
-                                              list[index].job,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Color(0xff6B7280),
-                                                fontWeight: FontWeight.w400,
-                                                wordSpacing: 1,
-                                              ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                            trailing:Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.end,
-                                              children: [
-                                                Text(
-                                                  list[index].work,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Color(0xff6B7280),
-                                                    fontWeight: FontWeight.w400,
-                                                    wordSpacing: 1,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 2.h),
-                                                Text(
-                                                  textAlign: TextAlign.right,
-                                                  list[index].years,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Color(0xff3366FF),
-                                                    fontWeight: FontWeight.w400,
-                                                    wordSpacing: 1,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
                                           ),
-                                      separatorBuilder: (context, index) => Divider(
+                                          subtitle: Text(
+                                            list[index].job,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Color(0xff6B7280),
+                                              fontWeight: FontWeight.w400,
+                                              wordSpacing: 1,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          trailing: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                list[index].work,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Color(0xff6B7280),
+                                                  fontWeight: FontWeight.w400,
+                                                  wordSpacing: 1,
+                                                ),
+                                              ),
+                                              SizedBox(height: 2.h),
+                                              Text(
+                                                textAlign: TextAlign.right,
+                                                list[index].years,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Color(0xff3366FF),
+                                                  fontWeight: FontWeight.w400,
+                                                  wordSpacing: 1,
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                      separatorBuilder: (context, index) =>
+                                          Divider(
                                             color: Color(0xffE5E7EB),
                                             thickness: 1,
                                           ),
@@ -609,7 +678,7 @@ class _JobDetailViewState extends State<JobDetailView>
                         ),
                       ),
                       Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 350.sp),
+                        padding: EdgeInsets.symmetric(vertical: 350.sp),
                         child: CustomizeButton(
                           text: "Apply now",
                           color: Color(0xff3366FF),
@@ -617,12 +686,12 @@ class _JobDetailViewState extends State<JobDetailView>
                           size: 16,
                           OnClick: () {
                             navigateTo(context, BioDataView());
+                            getCompany();
                           },
                         ),
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),

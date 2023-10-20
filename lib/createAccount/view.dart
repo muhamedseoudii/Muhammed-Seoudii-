@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
@@ -8,36 +10,15 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../core/design/customizedButtom/view.dart';
 import '../createAccount/view.dart';
+import 'cubit.dart';
 
-class SignInView extends StatefulWidget {
+class SignInView extends StatelessWidget {
    SignInView({Key? key}) : super(key: key);
 
-  @override
-  State<SignInView> createState() => _SignInViewState();
-}
-
-class _SignInViewState extends State<SignInView> {
-  final foormkey = GlobalKey<FormState>();
-
-  bool obscureT = false;
-
-  bool check = false;
-
-  TextEditingController controller1 = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
-  TextEditingController controller3 = TextEditingController();
-  Future<void> _launchURL(String url) async {
-    final Uri uri = Uri(scheme: "https", host: url);
-    if (!await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw "can not launch url ";
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    SignInCubit cubit = BlocProvider.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -76,152 +57,171 @@ class _SignInViewState extends State<SignInView> {
                   ),
                 ),
                 SizedBox(height: 45.h),
-                Form(
-                  key: foormkey,
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 80.h,
-                        width: 325.w,
-                        child: TextFormField(
-                          controller: controller1,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: "Username",
-                            labelStyle: TextStyle(
-                              color: Color(0xff9CA3AF),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            prefixIcon: SvgPicture.asset(
-                                "assets/icons/profile.svg",
-                                fit: BoxFit.scaleDown),
-                            filled: true,
-                            fillColor: Color(0xffFFFFFF),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Color(0xffD1D5DB), width: 3),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xffFF472B)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Color(0xffFF472B), width: 2),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                              BorderSide(color: Color(0xffD1D5DB), width: 2),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter your Username';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 1.h),
-                      Container(
-                        height: 80.h,
-                        width: 325.w,
-                        child: TextFormField(
-                          controller: controller3,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: "Email",
-                            labelStyle: TextStyle(
-                              color: Color(0xff9CA3AF),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            prefixIcon: SvgPicture.asset("assets/icons/sms.svg",
-                                fit: BoxFit.scaleDown),
-                            filled: true,
-                            fillColor: Color(0xffFFFFFF),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xffD1D5DB),width: 3,style: BorderStyle.solid),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xffFF472B)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xffFF472B),width: 2),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide:
-                              BorderSide(color: Color(0xffD1D5DB), width: 2),
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please confirm your Email';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      SizedBox(height: 1.h),
-                      Container(
-                        height: 80.h,
-                        width: 325.w,
-                        child: TextFormField(
-                          controller: controller2,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            labelStyle: TextStyle(
-                              color: Color(0xff9CA3AF),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            filled: true,
-                            fillColor: Color(0xffFFFFFF),
-                            prefixIcon: SvgPicture.asset("assets/icons/lock.svg",
-                                fit: BoxFit.scaleDown),
-                            suffixIcon: IconButton(
-                              icon: Icon(obscureT
-                                  ? Icons.visibility_outlined
-                                  : Icons.visibility_off_outlined),
-                              onPressed: () {
-                                setState(() {
-                                  obscureT = !obscureT;
-                                });
+                BlocBuilder(
+                    bloc: cubit,
+                    builder: (context, state) {
+                    return Form(
+                      key: cubit.foormkey,
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 80.h,
+                            width: 325.w,
+                            child: TextFormField(
+                              controller: cubit.controller1,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                hintText: "Username",
+                                hintStyle: TextStyle(
+                                  color: Color(0xff9CA3AF),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                prefixIcon: SvgPicture.asset(
+                                    "assets/icons/profile.svg",
+                                    fit: BoxFit.scaleDown),
+                                filled: true,
+                                fillColor: Color(0xffFFFFFF),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffD1D5DB), width: 3),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide: BorderSide(color: Color(0xffFF472B)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffFF472B), width: 2),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffD1D5DB), width: 2),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter your Username';
+                                }
+                                return null;
                               },
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Color(0xffD1D5DB), width: 3),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xffFF472B)),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Color(0xffFF472B), width: 2),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(8)),
-                              borderSide:
-                              BorderSide(color: Color(0xffD1D5DB), width: 2),
+                          ),
+                          SizedBox(height: 1.h),
+                          Container(
+                            height: 80.h,
+                            width: 325.w,
+                            child: TextFormField(
+                              controller: cubit.controller2,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                hintText: "Email",
+                                hintStyle: TextStyle(
+                                  color: Color(0xff9CA3AF),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                prefixIcon: SvgPicture.asset("assets/icons/sms.svg",
+                                    fit: BoxFit.scaleDown),
+                                filled: true,
+                                fillColor: Color(0xffFFFFFF),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide: BorderSide(color: Color(0xffD1D5DB),width: 3,style: BorderStyle.solid),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide: BorderSide(color: Color(0xffFF472B)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide: BorderSide(color: Color(0xffFF472B),width: 2),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffD1D5DB), width: 2),
+                                ),
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please confirm your Email';
+                                }
+                                return null;
+                              },
                             ),
                           ),
-                          obscureText: !(obscureT && true),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Please enter a password';
-                            } else if (value.length < 8) {
-                              return 'Password must be at least 8 characters';
-                            }
-                            return null;
-                          },
-                        ),
+                          SizedBox(height: 1.h),
+                          Container(
+                            height: 80.h,
+                            width: 325.w,
+                            child: TextFormField(
+                              controller: cubit.controller3,
+                              keyboardType: TextInputType.visiblePassword,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                hintStyle: TextStyle(
+                                  color: Color(0xff9CA3AF),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                filled: true,
+                                fillColor: Color(0xffFFFFFF),
+                                prefixIcon: SvgPicture.asset("assets/icons/lock.svg",
+                                    fit: BoxFit.scaleDown),
+                                suffixIcon: IconButton(
+                                  icon: Icon(cubit.obscureT
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined),
+                                  onPressed: cubit.toggleDesign,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffD1D5DB), width: 3),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide: BorderSide(color: Color(0xffFF472B)),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(8.r)),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffFF472B), width: 2),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                                  borderSide:
+                                  BorderSide(color: Color(0xffD1D5DB), width: 2),
+                                ),
+                              ),
+                              obscureText: !(cubit.obscureT && true),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Please enter a password';
+                                } else if (value.length < 6) {
+                                  return 'Password must be at least 6 characters';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  }
                 ),
                 SizedBox(height: 110.h),
                 Row(
@@ -251,18 +251,28 @@ class _SignInViewState extends State<SignInView> {
                   ],
                 ),
                 SizedBox(height: 20.h),
-                CustomizeButton(
-                  text: "Create account",
-                  color: Color(0xff3366FF),
-                  color1: Color(0xffFFFFFF),
-                  size: 16,
-                  OnClick: () {
-                    if (foormkey.currentState!.validate()) {
-                      // Passwords are valid and match
-                      // Perform further actions like saving the password
-                      navigateTo(context, SelectWorkView());
-                    }
-                  },
+                BlocBuilder(
+                    bloc: cubit,
+                    builder: (context, state) {
+                    return cubit.isLoading
+                        ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                        : CustomizeButton(
+                      text: "Create account",
+                      color: Color(0xff3366FF),
+                      color1: Color(0xffFFFFFF),
+                      size: 16,
+                      OnClick: () {
+                        if (cubit.foormkey.currentState!.validate()) {
+                          // Passwords are valid and match
+                          // Perform further actions like saving the password
+                          cubit.login(context);
+                          navigateTo(context, SelectWorkView());
+                        }
+                      },
+                    );
+                  }
                 ),
 
                 SizedBox(height: 20.h),
@@ -289,7 +299,7 @@ class _SignInViewState extends State<SignInView> {
                             backgroundColor: Color(0xffFFFFFF),
                             fixedSize: Size.fromHeight(55)),
                         onPressed: () {
-                          _launchURL("www.google.com");
+                          cubit.launchURLl("www.google.com");
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -323,7 +333,7 @@ class _SignInViewState extends State<SignInView> {
                             backgroundColor: Color(0xffFFFFFF),
                             fixedSize: Size.fromHeight(55)),
                         onPressed: () {
-                          _launchURL("www.facebook.com");
+                          cubit.launchURLl("www.facebook.com");
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -5,14 +5,9 @@ import '../../core/design/customizedButtom/view.dart';
 import '../../core/logic/helper_methods.dart';
 import '../createPass/view.dart';
 
-class CheckEmailView extends StatefulWidget {
+class CheckEmailView extends StatelessWidget {
   const CheckEmailView({Key? key}) : super(key: key);
 
-  @override
-  State<CheckEmailView> createState() => _CheckEmailViewState();
-}
-
-class _CheckEmailViewState extends State<CheckEmailView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

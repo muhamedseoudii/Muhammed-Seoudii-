@@ -7,14 +7,9 @@ import 'package:jobsque/homeNavBar/view.dart';
 import '../../core/design/customizedButtom/view.dart';
 import '../../core/logic/helper_methods.dart';
 
-class SuccessAccountView extends StatefulWidget {
+class SuccessAccountView extends StatelessWidget {
   const SuccessAccountView({Key? key}) : super(key: key);
 
-  @override
-  State<SuccessAccountView> createState() => _SuccessAccountViewState();
-}
-
-class _SuccessAccountViewState extends State<SuccessAccountView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

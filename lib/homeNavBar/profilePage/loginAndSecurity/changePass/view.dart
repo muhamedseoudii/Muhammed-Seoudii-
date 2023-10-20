@@ -16,6 +16,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   final foormkey = GlobalKey<FormState>();
   bool obscureT = false;
   bool obscureT2 = false;
+  bool obscureT3 = false;
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
@@ -162,12 +163,12 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                             prefixIcon: SvgPicture.asset("assets/icons/lock.svg",
                                 fit: BoxFit.scaleDown),
                             suffixIcon: IconButton(
-                              icon: Icon(obscureT
+                              icon: Icon(obscureT3
                                   ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined),
                               onPressed: () {
                                 setState(() {
-                                  obscureT = !obscureT;
+                                  obscureT3 = !obscureT3;
                                 });
                               },
                             ),
@@ -186,7 +187,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                               BorderSide(color: Color(0xffD1D5DB), width: 2),
                             ),
                           ),
-                          obscureText: !(obscureT && true),
+                          obscureText: !(obscureT3 && true),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Please enter your password';
@@ -280,39 +281,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                           }
                         },
                       ),
-                      Center(
-                        child: Container(
-                          height: 48,
-                          width: 350,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Color(0xff3366FF),
-                          ),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (foormkey.currentState!.validate()) {
-                                // Passwords are valid and match
-                                // Perform further actions like saving the password
-                                // navigateTo(context, PassResetSuccessview());
-                              }
-                            },
-                            child: Text(
-                              'Reset password',
-                              style: TextStyle(
-                                color: Color(0xffFFFFFF),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+
                     ],
                   ),
                 ),

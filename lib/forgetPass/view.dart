@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jobsque/core/logic/helper_methods.dart';
-import 'package:jobsque/forgetPass/checkEmail/view.dart';
 import 'package:jobsque/signUp/view.dart';
-
 import '../core/design/customizedButtom/view.dart';
+import 'checkEmail/view.dart';
+import 'cubit.dart';
 
-class ForgetPasswordView extends StatefulWidget {
+class ForgetPasswordView extends StatelessWidget {
    ForgetPasswordView({Key? key}) : super(key: key);
 
   @override
-  State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
-}
-
-class _ForgetPasswordViewState extends State<ForgetPasswordView> {
-  final formmKey = GlobalKey<FormState>();
-  final controller1 = TextEditingController();
-
-  @override
-  void dispose() {
-    controller1.dispose();
-    super.dispose();
-  }
-
-
-  @override
   Widget build(BuildContext context) {
+    ForgetPassCubit cubit = BlocProvider.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
@@ -72,49 +59,53 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   ),
                 ),
                 SizedBox(height: 40.h),
-                Form(
-                  key: formmKey,
-                  child: Container(
-                    height: 80.h,
-                    width: 325.w,
-                    child: TextFormField(
-                      controller: controller1,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                        labelStyle: TextStyle(
-                          color: Color(0xff9CA3AF),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        prefixIcon: SvgPicture.asset("assets/icons/sms.svg",
-                            fit: BoxFit.scaleDown),
-                        filled: true,
-
-                        fillColor: Color(0xffFFFFFF),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffD1D5DB),width: 3,style: BorderStyle.solid),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffFF472B)),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xffFF472B),width: 2),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide:
-                          BorderSide(color: Color(0xffD1D5DB), width: 2),
+                BlocBuilder(
+                    bloc: cubit,
+                    builder: (context, state) {
+                    return Form(
+                      key: cubit.formmKey,
+                      child: Container(
+                        height: 80.h,
+                        width: 325.w,
+                        child: TextFormField(
+                          controller: cubit.controller1,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            labelStyle: TextStyle(
+                              color: Color(0xff9CA3AF),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            prefixIcon: SvgPicture.asset("assets/icons/sms.svg",
+                                fit: BoxFit.scaleDown),
+                            filled: true,
+                            fillColor: Color(0xffFFFFFF),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xffD1D5DB),width: 3,style: BorderStyle.solid),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xffFF472B)),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xffFF472B),width: 2),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide:
+                              BorderSide(color: Color(0xffD1D5DB), width: 2),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please confirm your Email';
+                            }
+                            return null;
+                          },
                         ),
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please confirm your Email';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+                    );
+                  }
                 ),
                 SizedBox(height: 315.h),
                 Row(
@@ -144,18 +135,28 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                   ],
                 ),
                 SizedBox(height: 20.h),
-                CustomizeButton(
-                  text: "Request password reset",
-                  color: Color(0xff3366FF),
-                  color1: Color(0xffFFFFFF),
-                  size: 16,
-                  OnClick: () {
-                    if (formmKey.currentState!.validate()) {
-                      // Passwords are valid and match
-                      // Perform further actions like saving the password
-                      navigateTo(context, CheckEmailView());
-                    }
-                  },
+                BlocBuilder(
+                    bloc: cubit,
+                    builder: (context, state){
+                    return cubit.isLoading
+                        ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                        : CustomizeButton(
+                      text: "Request password reset",
+                      color: Color(0xff3366FF),
+                      color1: Color(0xffFFFFFF),
+                      size: 16,
+                      OnClick: () {
+                        if (cubit.formmKey.currentState!.validate()) {
+                          // Passwords are valid and match
+                          // Perform further actions like saving the password
+                          cubit.login(context);
+                          navigateTo(context, CheckEmailView());
+                        }
+                      },
+                    );
+                  }
                 ),
 
               ],

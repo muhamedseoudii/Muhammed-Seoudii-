@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/design/customizedButtom/view.dart';
 import '../../core/logic/helper_methods.dart';
-import '../createPass/view.dart';
+import '../../signUp/view.dart';
 
 class PassResetSuccessview extends StatefulWidget {
   const PassResetSuccessview({Key? key}) : super(key: key);
@@ -61,7 +61,7 @@ class _PassResetSuccessviewState extends State<PassResetSuccessview> {
             color1: Color(0xffFFFFFF),
             size: 16,
             OnClick: () {
-              navigateTo(context, PasswordScreen(),keepHistory: false);
+              navigateTo(context, SignUpView(),keepHistory: false);
             },
           ),
 
