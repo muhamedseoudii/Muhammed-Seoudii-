@@ -107,37 +107,26 @@ class _JobDetailViewState extends State<JobDetailView>
   ];
   String? selectedDropdownItem;
 
-  bool isLoading = false;
+  bool isLoading = true;
   bool isFailed = false;
   CompanyData? model;
 
   Future<void> getCompany() async {
-    isLoading = true;
-    setState(() {});
+
     try {
       var response = await Dio().get(
           "https://project2.amit-learning.com/api/showCompany",
           options: Options(headers: {
             'Authorization':
-                "Bearer 1548|ncWnCJsxHDyDvDKiCRsLGfqBNPznwPj6v2QcsC90"
+                "Bearer 1711|MVt56ZvQsvmc3j4ESfUyPmGiGCj13wqdnpU2nKWI"
           }));
       model = CompanyData.fromJson(response.data);
-      isLoading = false;
-      setState(() {});
     } on DioException {
       isFailed = true;
     }
     isLoading = false;
-
     setState(() {});
-    isFailed
-        ? ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text("Failed!"),
-              duration: Duration(seconds: 20),
-            ),
-          )
-        : navigateTo(context, BioDataView());
+
   }
 
   @override
@@ -187,7 +176,11 @@ class _JobDetailViewState extends State<JobDetailView>
                     height: 48.h,
                   ),
                   SizedBox(height: 12.h),
-                  Text(
+                  isLoading
+                      ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                      : Text(
                     textAlign: TextAlign.center,
                     model!.list[0].name,
                     style: TextStyle(
@@ -677,7 +670,11 @@ class _JobDetailViewState extends State<JobDetailView>
                           ],
                         ),
                       ),
-                      Padding(
+                      isLoading
+                          ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                          : Padding(
                         padding: EdgeInsets.symmetric(vertical: 350.sp),
                         child: CustomizeButton(
                           text: "Apply now",

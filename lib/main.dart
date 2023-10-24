@@ -8,6 +8,7 @@ import 'core/logic/helper_methods.dart';
 import 'createAccount/cubit.dart';
 import 'forgetPass/createPass/cubit.dart';
 import 'forgetPass/cubit.dart';
+import 'jobDetail/bioData/cubit.dart';
 import 'signUp/cubit.dart';
 import 'splash/view.dart';
 
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CreatePassCubit(),
+        ),
+        BlocProvider(
+          create: (context) => BioDataCubit(),
         ),
 
       ],

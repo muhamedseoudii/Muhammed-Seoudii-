@@ -74,20 +74,19 @@ class LoginCubit extends Cubit<LoginStates> {
         : navigateTo(context, MyHomePage(title: "home"));
 
   }
-
   void loadSavedCredentials() async {
     final String? savedEmail = await SharedPreferencesHelper.getEmail();
     final String? savedPassword = await SharedPreferencesHelper.getPassword();
 
     if (savedEmail != null && savedPassword != null) {
-     emit(SetPref());
+      emit(SetPref());
       controller1.text = savedEmail;
       controller2.text = savedPassword;
 
     }
   }
 
-  // Save the email and password to shared preferences and proceed with login
+
   void loginPrefs() async {
     final String email = controller1.text;
     final String password = controller2.text;
