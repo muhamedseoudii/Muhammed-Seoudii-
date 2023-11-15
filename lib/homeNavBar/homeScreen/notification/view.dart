@@ -14,7 +14,6 @@ class NotificationView extends StatefulWidget {
 }
 
 class _NotificationViewState extends State<NotificationView> {
-
   List<NotificationModel> list = [
     NotificationModel(
       userImage: "assets/images/DanaLogo.png",
@@ -51,17 +50,18 @@ class _NotificationViewState extends State<NotificationView> {
       userImage: "assets/images/Emaillogo.png",
       userName: "Email setup successful",
       icon: "assets/icons/dot.svg",
-      message: "Your email setup was successful with the following details: Your new email is rafifdianganz@gmail.com.",
+      message:
+          "Your email setup was successful with the following details: Your new email is rafifdianganz@gmail.com.",
       time: "10.00AM",
     ),
     NotificationModel(
       userImage: "assets/images/JobsqueLogo.png",
       userName: "Welcome to Jobsque",
       icon: "",
-      message: "Hello Rafif Dian Axelingga, thank you for registering Jobsque. Enjoy the various features that....",
+      message:
+          "Hello Rafif Dian Axelingga, thank you for registering Jobsque. Enjoy the various features that....",
       time: "08.00AM",
     ),
-
   ];
 
   @override
@@ -85,7 +85,6 @@ class _NotificationViewState extends State<NotificationView> {
                       fit: BoxFit.scaleDown,
                     ),
                   ),
-
                   Text(
                     textAlign: TextAlign.center,
                     "Notification",
@@ -97,11 +96,13 @@ class _NotificationViewState extends State<NotificationView> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      navigateTo(context, NotificationIlustrationView());
-                    },
-                    icon: Icon(Icons.delete_outline)
-                  ),
+                      onPressed: () {
+                        setState(() {
+                          list.clear();
+                        });
+                        // navigateTo(context, NotificationIlustrationView());
+                      },
+                      icon: Icon(Icons.delete_outline)),
                 ],
               ),
             ),
@@ -130,66 +131,70 @@ class _NotificationViewState extends State<NotificationView> {
               height: 330.h,
               child: Padding(
                 padding: const EdgeInsets.all(12),
-                child: ListView.separated(
-                    itemBuilder: (context, index) => ListTile(
-                        leading: Image.asset(list[index].userImage,
-                            fit: BoxFit.scaleDown),
-                        title: Text(
-                          list[index].userName,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xff111827),
-                            fontWeight: FontWeight.w500,
-                            wordSpacing: 1,
-                          ),
-                        ),
-                        subtitle: Text(
-                          list[index].message,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Color(0xff6B7280),
-                            fontWeight: FontWeight.w400,
-                            wordSpacing: 1,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        trailing: SizedBox(
-                          width: 67,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SvgPicture.asset(
-                                list[index].icon,
-                                fit: BoxFit.scaleDown,
+                child: list.isEmpty
+                    ? Center(child: NotificationIlustrationView())
+                    : ListView.separated(
+                        itemBuilder: (context, index) => ListTile(
+                            leading: Image.asset(list[index].userImage,
+                                fit: BoxFit.scaleDown),
+                            title: Text(
+                              list[index].userName,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xff111827),
+                                fontWeight: FontWeight.w500,
+                                wordSpacing: 1,
                               ),
-                              SizedBox(width: 10.w),
-                              Text(
-                                list[index].time,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Color(0xff6B7280),
-                                  fontWeight: FontWeight.w400,
-                                  wordSpacing: 1,
-                                ),
+                            ),
+                            subtitle: Text(
+                              list[index].message,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Color(0xff6B7280),
+                                fontWeight: FontWeight.w400,
+                                wordSpacing: 1,
                               ),
-                            ],
-                          ),
-                        )),
-                    separatorBuilder: (context, index) => Divider(
-                          color: Color(0xffE5E7EB),
-                          thickness: 1,
-                        ),
-                    itemCount: list.length),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            trailing: SizedBox(
+                              width: 67,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SvgPicture.asset(
+                                    list[index].icon,
+                                    fit: BoxFit.scaleDown,
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Text(
+                                    list[index].time,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff6B7280),
+                                      fontWeight: FontWeight.w400,
+                                      wordSpacing: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                        separatorBuilder: (context, index) => Divider(
+                              color: Color(0xffE5E7EB),
+                              thickness: 1,
+                            ),
+                        itemCount: list.length),
               ),
             ),
-            Divider(
-              color: Color(0xffE5E7EB),
-              thickness: 1,
-              endIndent: 20,
-              indent: 20,
+            // Divider(
+            //   color: Color(0xffE5E7EB),
+            //   thickness: 1,
+            //   endIndent: 20,
+            //   indent: 20,
+            // ),
+            SizedBox(
+              height: 30.h,
             ),
-            SizedBox(height: 30.h,),
             Container(
               height: 36.h,
               width: MediaQuery.of(context).size.width,
@@ -211,7 +216,9 @@ class _NotificationViewState extends State<NotificationView> {
                 ),
               ),
             ),
-            SizedBox(height: 15.h,),
+            SizedBox(
+              height: 15.h,
+            ),
             SizedBox(
               height: 200.h,
               child: Padding(
@@ -263,12 +270,12 @@ class _NotificationViewState extends State<NotificationView> {
                           ),
                         )),
                     separatorBuilder: (context, index) => SizedBox(
-                      height: 30.h,
-                      child: Divider(
-                        color: Color(0xffE5E7EB),
-                        thickness: 1,
-                      ),
-                    ),
+                          height: 30.h,
+                          child: Divider(
+                            color: Color(0xffE5E7EB),
+                            thickness: 1,
+                          ),
+                        ),
                     itemCount: list2.length),
               ),
             ),

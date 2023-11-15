@@ -74,7 +74,7 @@ class _RecentJobState extends State<RecentJob> {
     return Container(
       width: 340,
       height: 120,
-      color: Color(0xffFFFFFF),
+      color: const Color(0xffFFFFFF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -90,7 +90,7 @@ class _RecentJobState extends State<RecentJob> {
                 children: [
                   Text(
                     widget.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                         color: Color(0xff111827),
@@ -99,7 +99,7 @@ class _RecentJobState extends State<RecentJob> {
                   SizedBox(height: 5.h),
                   Text(
                     widget.desc,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff111827),
@@ -129,11 +129,11 @@ class _RecentJobState extends State<RecentJob> {
                 height: 30.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100.r),
-                  color: Color(0xffD6E4FF),
+                  color: const Color(0xffD6E4FF),
                 ),
                 child: TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Fulltime",
                     style: TextStyle(
                       fontSize: 12,
@@ -148,11 +148,11 @@ class _RecentJobState extends State<RecentJob> {
                 height: 30.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100.r),
-                  color: Color(0xffD6E4FF),
+                  color: const Color(0xffD6E4FF),
                 ),
                 child: TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Remote",
                     style: TextStyle(
                       fontSize: 12,
@@ -167,11 +167,11 @@ class _RecentJobState extends State<RecentJob> {
                 height: 30.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100.r),
-                  color: Color(0xffD6E4FF),
+                  color: const Color(0xffD6E4FF),
                 ),
                 child: TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     "Senior",
                     style: TextStyle(
                       fontSize: 12,
@@ -182,7 +182,7 @@ class _RecentJobState extends State<RecentJob> {
                 ),
               ),
               SizedBox(width: 18.w),
-              Row(
+              const Row(
                 children: [
                   Text(
                     "\$12K-15K",
@@ -229,11 +229,12 @@ class SavedJop extends StatefulWidget {
 }
 
 class _SavedJopState extends State<SavedJop> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       width: 340,
       height: 110,
-      color: Color(0xffFFFFFF),
+      color: const Color(0xffFFFFFF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -249,7 +250,7 @@ class _SavedJopState extends State<SavedJop> {
                 children: [
                   Text(
                     widget.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                         color: Color(0xff111827),
@@ -258,7 +259,7 @@ class _SavedJopState extends State<SavedJop> {
                   SizedBox(height: 5.h),
                   Text(
                     widget.desc,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff111827),
@@ -271,9 +272,9 @@ class _SavedJopState extends State<SavedJop> {
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
-                    backgroundColor: Color(0xffFFFFFF),
+                    backgroundColor: const Color(0xffFFFFFF),
                     isScrollControlled: true,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(20),
                       ),
@@ -281,7 +282,8 @@ class _SavedJopState extends State<SavedJop> {
                     builder: (context) => SizedBox(
                       height: 300.h,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 24, top: 36, right: 24),
+                        padding:
+                            const EdgeInsets.only(left: 24, top: 36, right: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -290,9 +292,9 @@ class _SavedJopState extends State<SavedJop> {
                               height: 50.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100.r),
-                                color: Color(0xffFFFFFF),
+                                color: const Color(0xffFFFFFF),
                                 border: Border.all(
-                                    color: Color(0xffD1D5DB), width: 1),
+                                    color: const Color(0xffD1D5DB), width: 1),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(14),
@@ -303,7 +305,7 @@ class _SavedJopState extends State<SavedJop> {
                                         "assets/icons/directbox.svg",
                                         fit: BoxFit.scaleDown),
                                     SizedBox(width: 14.w),
-                                    Text(
+                                    const Text(
                                       "Apply Job",
                                       style: TextStyle(
                                           fontSize: 16,
@@ -327,9 +329,9 @@ class _SavedJopState extends State<SavedJop> {
                               height: 50.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100.r),
-                                color: Color(0xffFFFFFF),
+                                color: const Color(0xffFFFFFF),
                                 border: Border.all(
-                                    color: Color(0xffD1D5DB), width: 1),
+                                    color: const Color(0xffD1D5DB), width: 1),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(14),
@@ -339,10 +341,10 @@ class _SavedJopState extends State<SavedJop> {
                                     SvgPicture.asset(
                                       "assets/icons/export.svg",
                                       fit: BoxFit.scaleDown,
-                                      color: Color(0xff111827),
+                                      color: const Color(0xff111827),
                                     ),
                                     SizedBox(width: 14.w),
-                                    Text(
+                                    const Text(
                                       "Share via...",
                                       style: TextStyle(
                                           fontSize: 16,
@@ -366,9 +368,9 @@ class _SavedJopState extends State<SavedJop> {
                               height: 50.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100.r),
-                                color: Color(0xffFFFFFF),
+                                color: const Color(0xffFFFFFF),
                                 border: Border.all(
-                                    color: Color(0xffD1D5DB), width: 1),
+                                    color: const Color(0xffD1D5DB), width: 1),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(14),
@@ -378,10 +380,10 @@ class _SavedJopState extends State<SavedJop> {
                                     SvgPicture.asset(
                                       "assets/icons/save.svg",
                                       fit: BoxFit.scaleDown,
-                                      color: Color(0xff111827),
+                                      color: const Color(0xff111827),
                                     ),
                                     SizedBox(width: 14.w),
-                                    Text(
+                                    const Text(
                                       "Cancel save",
                                       style: TextStyle(
                                           fontSize: 16,
@@ -392,8 +394,8 @@ class _SavedJopState extends State<SavedJop> {
                                     SizedBox(width: 170.w),
                                     GestureDetector(
                                         onTap: () {
-                                          navigateTo(
-                                              context, SavedIlustrationView());
+                                          navigateTo(context,
+                                              const SavedIlustrationView());
                                         },
                                         child: SvgPicture.asset(
                                             "assets/icons/arrow-right.svg",
@@ -419,7 +421,7 @@ class _SavedJopState extends State<SavedJop> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "Posted 2 days ago",
                 style: TextStyle(
                     fontSize: 12,
@@ -433,7 +435,7 @@ class _SavedJopState extends State<SavedJop> {
                 fit: BoxFit.scaleDown,
               ),
               SizedBox(width: 6.w),
-              Text(
+              const Text(
                 "Be an early applicant",
                 style: TextStyle(
                     fontSize: 12,
@@ -463,7 +465,8 @@ class ProfileContainer extends StatelessWidget {
       required this.icon1,
       required this.backcolor,
       required this.bordercolor,
-      required this.OnClick, required this.size})
+      required this.OnClick,
+      required this.size})
       : super(key: key);
 
   @override
@@ -494,7 +497,7 @@ class ProfileContainer extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: Color(0xff111827),
+                        color: const Color(0xff111827),
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
                         wordSpacing: 1,
@@ -504,7 +507,7 @@ class ProfileContainer extends StatelessWidget {
                     Text(
                       desc,
                       style: TextStyle(
-                        color: Color(0xff6B7280),
+                        color: const Color(0xff6B7280),
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         wordSpacing: 1,
@@ -518,7 +521,6 @@ class ProfileContainer extends StatelessWidget {
                   width: 20.w,
                   height: 20.h,
                 ),
-
               ],
             ),
           ),
@@ -528,13 +530,16 @@ class ProfileContainer extends StatelessWidget {
   }
 }
 
-
-
 class TextFieldApp extends StatelessWidget {
   final TextEditingController Controller;
-  final double sizeW,sizeH;
+  final double sizeW, sizeH;
 
-  const TextFieldApp({Key? key, required this.Controller, required this.sizeW, required this.sizeH}) : super(key: key);
+  const TextFieldApp(
+      {Key? key,
+      required this.Controller,
+      required this.sizeW,
+      required this.sizeH})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -547,25 +552,25 @@ class TextFieldApp extends StatelessWidget {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Color(0xffFFFFFF),
+            fillColor: const Color(0xffFFFFFF),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
-              BorderSide(color: Color(0xffD1D5DB), width: 2.w),
+                  BorderSide(color: const Color(0xffD1D5DB), width: 2.w),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(color: Color(0xffFF472B)),
+              borderSide: const BorderSide(color: Color(0xffFF472B)),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
-              BorderSide(color: Color(0xffFF472B), width: 2.w),
+                  BorderSide(color: const Color(0xffFF472B), width: 2.w),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
-              BorderSide(color: Color(0xffD1D5DB), width: 1.w),
+                  BorderSide(color: const Color(0xffD1D5DB), width: 1.w),
             ),
           ),
           validator: (value) {
@@ -580,9 +585,6 @@ class TextFieldApp extends StatelessWidget {
   }
 }
 
-
-
-
 class ProfileContainer1 extends StatelessWidget {
   final String image, title, desc, icon, desc1;
   final Color backcolor, bordercolor;
@@ -591,13 +593,15 @@ class ProfileContainer1 extends StatelessWidget {
 
   ProfileContainer1(
       {Key? key,
-        required this.image,
-        required this.title,
-        required this.desc,
-        required this.icon,
-        required this.backcolor,
-        required this.bordercolor,
-        required this.OnClick, required this.size, required this.desc1})
+      required this.image,
+      required this.title,
+      required this.desc,
+      required this.icon,
+      required this.backcolor,
+      required this.bordercolor,
+      required this.OnClick,
+      required this.size,
+      required this.desc1})
       : super(key: key);
 
   @override
@@ -628,7 +632,7 @@ class ProfileContainer1 extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: Color(0xff111827),
+                        color: const Color(0xff111827),
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
                         wordSpacing: 1,
@@ -638,7 +642,7 @@ class ProfileContainer1 extends StatelessWidget {
                     Text(
                       desc,
                       style: TextStyle(
-                        color: Color(0xff6B7280),
+                        color: const Color(0xff6B7280),
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         wordSpacing: 1,
@@ -648,7 +652,7 @@ class ProfileContainer1 extends StatelessWidget {
                     Text(
                       desc1,
                       style: TextStyle(
-                        color: Color(0xff6B7280),
+                        color: const Color(0xff6B7280),
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                         wordSpacing: 1,
@@ -667,7 +671,6 @@ class ProfileContainer1 extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
@@ -677,12 +680,16 @@ class ProfileContainer1 extends StatelessWidget {
   }
 }
 
-
 class TextFieldApp1 extends StatelessWidget {
   final TextEditingController Controller;
-  final double sizeW,sizeH;
+  final double sizeW, sizeH;
 
-  const TextFieldApp1({Key? key, required this.Controller, required this.sizeW, required this.sizeH}) : super(key: key);
+  const TextFieldApp1(
+      {Key? key,
+      required this.Controller,
+      required this.sizeW,
+      required this.sizeH})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -694,29 +701,28 @@ class TextFieldApp1 extends StatelessWidget {
           controller: Controller,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-            prefixIcon: SvgPicture.asset(
-                "assets/icons/location.svg",
+            prefixIcon: SvgPicture.asset("assets/icons/location.svg",
                 fit: BoxFit.scaleDown),
             filled: true,
-            fillColor: Color(0xffFFFFFF),
+            fillColor: const Color(0xffFFFFFF),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
-              BorderSide(color: Color(0xffD1D5DB), width: 2.w),
+                  BorderSide(color: const Color(0xffD1D5DB), width: 2.w),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
-              borderSide: BorderSide(color: Color(0xffFF472B)),
+              borderSide: const BorderSide(color: Color(0xffFF472B)),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
-              BorderSide(color: Color(0xffFF472B), width: 2.w),
+                  BorderSide(color: const Color(0xffFF472B), width: 2.w),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.r),
               borderSide:
-              BorderSide(color: Color(0xffD1D5DB), width: 1.w),
+                  BorderSide(color: const Color(0xffD1D5DB), width: 1.w),
             ),
           ),
           validator: (value) {

@@ -145,12 +145,13 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                       },
                                       child: Container(
                                         height: 188.h,
-                                        width: 330.w,
+                                        width: 332.w,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
                                             Row(
+                                              mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 SvgPicture.asset(
                                                   "assets/icons/SpectrumLogo.svg",
@@ -169,7 +170,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.w500,
-                                                          color: Color(0xff111827),
+                                                          color:
+                                                              Color(0xff111827),
                                                           wordSpacing: 1),
                                                     ),
                                                     SizedBox(height: 5.h),
@@ -179,12 +181,13 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                           fontSize: 14,
                                                           fontWeight:
                                                               FontWeight.w400,
-                                                          color: Color(0xff111827),
+                                                          color:
+                                                              Color(0xff111827),
                                                           wordSpacing: 1),
                                                     ),
                                                   ],
                                                 ),
-                                                SizedBox(width: 59.w),
+                                                SizedBox(width: 57.w),
                                                 IconButton(
                                                   onPressed: () {
                                                     isSelected = !isSelected;
@@ -198,7 +201,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                       : SvgPicture.asset(
                                                           "assets/icons/save.svg",
                                                           fit: BoxFit.scaleDown,
-                                                          color: Color(0xff111827),
+                                                          color:
+                                                              Color(0xff111827),
                                                         ),
                                                 )
                                               ],
@@ -218,9 +222,11 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                     child: Text(
                                                       "Fulltime",
                                                       style: TextStyle(
-                                                        color: Color(0xff3366FF),
+                                                        color:
+                                                            Color(0xff3366FF),
                                                         fontSize: 12.sp,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                         wordSpacing: 1,
                                                       ),
                                                     ),
@@ -239,15 +245,17 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                     child: Text(
                                                       "Remote",
                                                       style: TextStyle(
-                                                        color: Color(0xff3366FF),
+                                                        color:
+                                                            Color(0xff3366FF),
                                                         fontSize: 12.sp,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                         wordSpacing: 1,
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(width: 80.w),
+                                                SizedBox(width: 79.w),
                                                 Text(
                                                   "Posted 2 days ago",
                                                   style: TextStyle(
@@ -265,10 +273,12 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                               width: 330.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(10.r),
+                                                      BorderRadius.circular(
+                                                          10.r),
                                                   color: Color(0xffFFFFFF),
                                                   border: Border.all(
-                                                      color: Color(0xffD1D5DB))),
+                                                      color:
+                                                          Color(0xffD1D5DB))),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 10.sp,
@@ -292,8 +302,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                               TextAlign.center,
                                                           "Biodata",
                                                           style: TextStyle(
-                                                            color:
-                                                                Color(0xff3366FF),
+                                                            color: Color(
+                                                                0xff3366FF),
                                                             fontSize: 12.sp,
                                                             fontWeight:
                                                                 FontWeight.w400,
@@ -320,8 +330,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                               TextAlign.center,
                                                           "Type of work",
                                                           style: TextStyle(
-                                                            color:
-                                                                Color(0xff111827),
+                                                            color: Color(
+                                                                0xff111827),
                                                             fontSize: 12.sp,
                                                             fontWeight:
                                                                 FontWeight.w400,
@@ -348,8 +358,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                               TextAlign.center,
                                                           "Upload portfolio",
                                                           style: TextStyle(
-                                                            color:
-                                                                Color(0xff111827),
+                                                            color: Color(
+                                                                0xff111827),
                                                             fontSize: 12.sp,
                                                             fontWeight:
                                                                 FontWeight.w400,
@@ -380,7 +390,7 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                         width: 330.w,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
@@ -393,15 +403,16 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                 SizedBox(width: 20.w),
                                                 Column(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       "UI/UX Designer",
                                                       style: TextStyle(
                                                           fontSize: 20,
                                                           fontWeight:
-                                                          FontWeight.w500,
-                                                          color: Color(0xff111827),
+                                                              FontWeight.w500,
+                                                          color:
+                                                              Color(0xff111827),
                                                           wordSpacing: 1),
                                                     ),
                                                     SizedBox(height: 5.h),
@@ -410,8 +421,9 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                       style: TextStyle(
                                                           fontSize: 14,
                                                           fontWeight:
-                                                          FontWeight.w400,
-                                                          color: Color(0xff111827),
+                                                              FontWeight.w400,
+                                                          color:
+                                                              Color(0xff111827),
                                                           wordSpacing: 1),
                                                     ),
                                                   ],
@@ -424,14 +436,15 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                   },
                                                   icon: isSelected1
                                                       ? SvgPicture.asset(
-                                                    "assets/icons/save1.svg",
-                                                    fit: BoxFit.scaleDown,
-                                                  )
+                                                          "assets/icons/save1.svg",
+                                                          fit: BoxFit.scaleDown,
+                                                        )
                                                       : SvgPicture.asset(
-                                                    "assets/icons/save.svg",
-                                                    fit: BoxFit.scaleDown,
-                                                    color: Color(0xff111827),
-                                                  ),
+                                                          "assets/icons/save.svg",
+                                                          fit: BoxFit.scaleDown,
+                                                          color:
+                                                              Color(0xff111827),
+                                                        ),
                                                 )
                                               ],
                                             ),
@@ -443,16 +456,18 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                   width: 70.w,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          100.r),
+                                                          BorderRadius.circular(
+                                                              100.r),
                                                       color: Color(0xffD6E4FF)),
                                                   child: Center(
                                                     child: Text(
                                                       "Fulltime",
                                                       style: TextStyle(
-                                                        color: Color(0xff3366FF),
+                                                        color:
+                                                            Color(0xff3366FF),
                                                         fontSize: 12.sp,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                         wordSpacing: 1,
                                                       ),
                                                     ),
@@ -464,16 +479,18 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                   width: 70.w,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          100.r),
+                                                          BorderRadius.circular(
+                                                              100.r),
                                                       color: Color(0xffD6E4FF)),
                                                   child: Center(
                                                     child: Text(
                                                       "Remote",
                                                       style: TextStyle(
-                                                        color: Color(0xff3366FF),
+                                                        color:
+                                                            Color(0xff3366FF),
                                                         fontSize: 12.sp,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                         wordSpacing: 1,
                                                       ),
                                                     ),
@@ -497,10 +514,12 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                               width: 330.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(10.r),
+                                                      BorderRadius.circular(
+                                                          10.r),
                                                   color: Color(0xffFFFFFF),
                                                   border: Border.all(
-                                                      color: Color(0xffD1D5DB))),
+                                                      color:
+                                                          Color(0xffD1D5DB))),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 10.sp,
@@ -509,8 +528,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                     top: 12.sp),
                                                 child: Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Column(
                                                       children: [
@@ -521,14 +540,14 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                         SizedBox(height: 8.w),
                                                         Text(
                                                           textAlign:
-                                                          TextAlign.center,
+                                                              TextAlign.center,
                                                           "Biodata",
                                                           style: TextStyle(
-                                                            color:
-                                                            Color(0xff3366FF),
+                                                            color: Color(
+                                                                0xff3366FF),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                            FontWeight.w400,
+                                                                FontWeight.w400,
                                                             wordSpacing: 1,
                                                           ),
                                                         ),
@@ -549,14 +568,14 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                         SizedBox(height: 8.w),
                                                         Text(
                                                           textAlign:
-                                                          TextAlign.center,
+                                                              TextAlign.center,
                                                           "Type of work",
                                                           style: TextStyle(
-                                                            color:
-                                                            Color(0xff3366FF),
+                                                            color: Color(
+                                                                0xff3366FF),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                            FontWeight.w400,
+                                                                FontWeight.w400,
                                                             wordSpacing: 1,
                                                           ),
                                                         ),
@@ -577,14 +596,14 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                         SizedBox(height: 8.w),
                                                         Text(
                                                           textAlign:
-                                                          TextAlign.center,
+                                                              TextAlign.center,
                                                           "Upload portfolio",
                                                           style: TextStyle(
-                                                            color:
-                                                            Color(0xff111827),
+                                                            color: Color(
+                                                                0xff111827),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                            FontWeight.w400,
+                                                                FontWeight.w400,
                                                             wordSpacing: 1,
                                                           ),
                                                         ),
@@ -611,7 +630,7 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                         width: 330.w,
                                         child: Column(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
@@ -624,15 +643,16 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                 SizedBox(width: 20.w),
                                                 Column(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       "UI/UX Designer",
                                                       style: TextStyle(
                                                           fontSize: 20,
                                                           fontWeight:
-                                                          FontWeight.w500,
-                                                          color: Color(0xff111827),
+                                                              FontWeight.w500,
+                                                          color:
+                                                              Color(0xff111827),
                                                           wordSpacing: 1),
                                                     ),
                                                     SizedBox(height: 5.h),
@@ -641,8 +661,9 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                       style: TextStyle(
                                                           fontSize: 14,
                                                           fontWeight:
-                                                          FontWeight.w400,
-                                                          color: Color(0xff111827),
+                                                              FontWeight.w400,
+                                                          color:
+                                                              Color(0xff111827),
                                                           wordSpacing: 1),
                                                     ),
                                                   ],
@@ -655,14 +676,15 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                   },
                                                   icon: isSelected2
                                                       ? SvgPicture.asset(
-                                                    "assets/icons/save1.svg",
-                                                    fit: BoxFit.scaleDown,
-                                                  )
+                                                          "assets/icons/save1.svg",
+                                                          fit: BoxFit.scaleDown,
+                                                        )
                                                       : SvgPicture.asset(
-                                                    "assets/icons/save.svg",
-                                                    fit: BoxFit.scaleDown,
-                                                    color: Color(0xff111827),
-                                                  ),
+                                                          "assets/icons/save.svg",
+                                                          fit: BoxFit.scaleDown,
+                                                          color:
+                                                              Color(0xff111827),
+                                                        ),
                                                 )
                                               ],
                                             ),
@@ -674,16 +696,18 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                   width: 70.w,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          100.r),
+                                                          BorderRadius.circular(
+                                                              100.r),
                                                       color: Color(0xffD6E4FF)),
                                                   child: Center(
                                                     child: Text(
                                                       "Fulltime",
                                                       style: TextStyle(
-                                                        color: Color(0xff3366FF),
+                                                        color:
+                                                            Color(0xff3366FF),
                                                         fontSize: 12.sp,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                         wordSpacing: 1,
                                                       ),
                                                     ),
@@ -695,16 +719,18 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                   width: 70.w,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          100.r),
+                                                          BorderRadius.circular(
+                                                              100.r),
                                                       color: Color(0xffD6E4FF)),
                                                   child: Center(
                                                     child: Text(
                                                       "Remote",
                                                       style: TextStyle(
-                                                        color: Color(0xff3366FF),
+                                                        color:
+                                                            Color(0xff3366FF),
                                                         fontSize: 12.sp,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                         wordSpacing: 1,
                                                       ),
                                                     ),
@@ -728,10 +754,12 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                               width: 330.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.circular(10.r),
+                                                      BorderRadius.circular(
+                                                          10.r),
                                                   color: Color(0xffFFFFFF),
                                                   border: Border.all(
-                                                      color: Color(0xffD1D5DB))),
+                                                      color:
+                                                          Color(0xffD1D5DB))),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 10.sp,
@@ -740,8 +768,8 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                     top: 12.sp),
                                                 child: Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Column(
                                                       children: [
@@ -752,14 +780,14 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                         SizedBox(height: 8.w),
                                                         Text(
                                                           textAlign:
-                                                          TextAlign.center,
+                                                              TextAlign.center,
                                                           "Biodata",
                                                           style: TextStyle(
-                                                            color:
-                                                            Color(0xff3366FF),
+                                                            color: Color(
+                                                                0xff3366FF),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                            FontWeight.w400,
+                                                                FontWeight.w400,
                                                             wordSpacing: 1,
                                                           ),
                                                         ),
@@ -780,14 +808,14 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                         SizedBox(height: 8.w),
                                                         Text(
                                                           textAlign:
-                                                          TextAlign.center,
+                                                              TextAlign.center,
                                                           "Type of work",
                                                           style: TextStyle(
-                                                            color:
-                                                            Color(0xff3366FF),
+                                                            color: Color(
+                                                                0xff3366FF),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                            FontWeight.w400,
+                                                                FontWeight.w400,
                                                             wordSpacing: 1,
                                                           ),
                                                         ),
@@ -808,14 +836,14 @@ class _AppliedPageViewState extends State<AppliedPageView>
                                                         SizedBox(height: 8.w),
                                                         Text(
                                                           textAlign:
-                                                          TextAlign.center,
+                                                              TextAlign.center,
                                                           "Upload portfolio",
                                                           style: TextStyle(
-                                                            color:
-                                                            Color(0xff3366FF),
+                                                            color: Color(
+                                                                0xff3366FF),
                                                             fontSize: 12.sp,
                                                             fontWeight:
-                                                            FontWeight.w400,
+                                                                FontWeight.w400,
                                                             wordSpacing: 1,
                                                           ),
                                                         ),
